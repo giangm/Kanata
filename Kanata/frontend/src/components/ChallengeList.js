@@ -32,8 +32,8 @@ class ChallengeList extends React.Component {
 
     componentDidMount() {
         axios.get("http://localhost:8000/api/").then(response => {
-            this.setState({ data: response.data});
-            console.log(response.data);
+            this.setState({ data: response.data});/* 
+            console.log(this.state.data["data"]["0"]["0"]) */
         })
     }
 
@@ -61,16 +61,16 @@ class ChallengeList extends React.Component {
                 const backgroundColor = isExpanded ? this.state.cardColors[index % this.state.cardColors.length][1] : 'transparent';
                 const cardInnerColor = isExpanded ? 'black' : 'white'
                 challenges.push(
-                    <ListItem key={index} component={NavLink} to={`/challenge/${data[key][2]}`}>
+                    <ListItem key={index} component={NavLink} to={`/challenge/${data["data"][""+index]["2"]}`}>
                         <Card sx={{ border: 1, borderColor: c[0] , p: 2}} style={{ backgroundColor: backgroundColor }}
-                            onClick={() => this.setState({ expandedCardIndex: index })}
+                            
                             onMouseEnter={() => this.handleMouseEnter(index)} onMouseLeave={this.handleMouseLeave}>
                             <Stack spacing={20} direction="row" alignItems="center">
                                 <Avatar sx={{ backgroundColor: c[1] }}>
                                     <PestControlIcon />
                                 </Avatar>
-                                <Typography  color={cardInnerColor} size="sm">{data[key][2]}</Typography >
-                                <Typography color={cardInnerColor}>{data[key][1]}</Typography>
+                                <Typography color={cardInnerColor} size="sm">{data["data"][""+index]["2"]}</Typography >
+                                <Typography color={cardInnerColor}>{data["data"][""+index]["1"]}</Typography>
                                 <CheckCircleOutlineIcon sx={{ color: cardInnerColor }} />
                                 <PanoramaFishEyeIcon sx={{ color: cardInnerColor }} />
                             </Stack>

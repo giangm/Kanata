@@ -1,5 +1,23 @@
 .App {
   text-align: center;
+  background-color: black;
+
+
+  -ms-overflow-style: none !important;
+  /* Internet Explorer 10+ */
+  scrollbar-width: none !important;
+  /* Firefox */
+}
+
+.App::-webkit-scrollbar {
+  display: none;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  /* Remove scrollbar space */
+  background: transparent;
+  /* Optional: just make scrollbar invisible */
 }
 
 .App-logo {
