@@ -14,6 +14,8 @@ import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import PanoramaFishEyeIcon from '@mui/icons-material/PanoramaFishEye';
 import PestControlIcon from '@mui/icons-material/PestControl';
 
+import './css/ChallengeList.css'
+
 class ChallengeList extends React.Component {
     
 	state = {
@@ -31,7 +33,7 @@ class ChallengeList extends React.Component {
     };
 
     componentDidMount() {
-        axios.get("http://localhost:8000/api/").then(response => {
+        axios.get("http://localhost:8000/api/challengelist").then(response => {
             this.setState({ data: response.data});/* 
             console.log(this.state.data["data"]["0"]["0"]) */
         })
@@ -69,8 +71,8 @@ class ChallengeList extends React.Component {
                                 <Avatar sx={{ backgroundColor: c[1] }}>
                                     <PestControlIcon />
                                 </Avatar>
-                                <Typography color={cardInnerColor} size="sm">{data["data"][""+index]["2"]}</Typography >
-                                <Typography color={cardInnerColor}>{data["data"][""+index]["1"]}</Typography>
+                                <Typography variant='body1' color={cardInnerColor} size="sm">{data["data"][""+index]["2"]}</Typography>
+                                <Typography variant='body1' color={cardInnerColor}>{data["data"][""+index]["1"]}</Typography>
                                 <CheckCircleOutlineIcon sx={{ color: cardInnerColor }} />
                                 <PanoramaFishEyeIcon sx={{ color: cardInnerColor }} />
                             </Stack>
@@ -82,10 +84,10 @@ class ChallengeList extends React.Component {
         };
 
         return (
-            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '100vh', padding: '1vh' }}>
+            <div className="container">
                 <CssBaseline />
                 <div style={{ height: '10vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                    <Typography>Unlock Machine Secrets with Precision: White Box Testing Unleashed!</Typography>
+                    <Typography variant='h1'>Unlock Machine Secrets with Precision: White Box Testing Unleashed!</Typography>
                 </div>
                 <div style={{ overflow: 'scroll', height: '100%' }}>
                     <List sx={{ width: '100%', padding: 0, margin: 0 }} aria-label="contacts">
