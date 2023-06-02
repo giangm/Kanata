@@ -1,0 +1,4 @@
+#!/bin/bash
+
+docker build -t beniko docker_images/
+docker run -it --rm --privileged --log-driver none -p 8080:80 beniko
