@@ -1,4 +1,4 @@
 #!/bin/bash
 
 docker build -t sakura docker_images/
-docker run -it --rm --privileged -p 5000:5000 sakura
+docker run -it --rm --privileged -p 5101:5000 sakura
