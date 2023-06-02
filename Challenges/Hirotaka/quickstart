@@ -1,0 +1,4 @@
+#!/bin/bash
+
+docker build -t hirotaka docker_images/
+docker run -it --rm --privileged -p 8080:8080 hirotaka
