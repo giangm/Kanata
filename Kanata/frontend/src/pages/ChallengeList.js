@@ -3,8 +3,8 @@ import axios from 'axios';
 import { NavLink } from "react-router-dom";
 
 import CssBaseline from '@mui/material/CssBaseline';
-import Typography  from '@mui/material/Typography';
-import Card  from '@mui/material/Card';
+import Typography from '@mui/material/Typography';
+import Card from '@mui/material/Card';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import Stack from '@mui/material/Stack';
@@ -17,8 +17,8 @@ import PestControlIcon from '@mui/icons-material/PestControl';
 import './css/ChallengeList.css'
 
 class ChallengeList extends React.Component {
-    
-	state = {
+
+    state = {
         data: [],
         expandedCardIndex: -1,
         cardColors: [
@@ -34,12 +34,12 @@ class ChallengeList extends React.Component {
 
     componentDidMount() {
         axios.get("http://localhost:8000/api/challengelist").then(response => {
-            this.setState({ data: response.data});/* 
-            console.log(this.state.data["data"]["0"]["0"]) */
+            this.setState({ data: response.data["data"] });
+            //console.log(response.data);
         })
     }
 
-	handleMouseEnter = (index) => {
+    handleMouseEnter = (index) => {
         this.setState({
             expandedCardIndex: index
         });
@@ -53,29 +53,28 @@ class ChallengeList extends React.Component {
 
 
     render() {
-		const { data } = this.state;
+        const { data } = this.state;
 
-		const list = () => {
+        const list = () => {
             const challenges = [];
-            Object.keys(data).map((key, index) => {
+            Object.entries(data).map((key, index) => {
                 const c = this.state.cardColors[index % this.state.cardColors.length]
                 const isExpanded = index === this.state.expandedCardIndex;
                 const backgroundColor = isExpanded ? this.state.cardColors[index % this.state.cardColors.length][1] : 'transparent';
                 const cardInnerColor = isExpanded ? 'black' : 'white'
                 challenges.push(
-                    <ListItem key={index} component={NavLink} to={`/challenge/${data["data"][""+index]["2"]}`}>
-                        <Card sx={{ border: 1, borderColor: c[0] , p: 2}} style={{ backgroundColor: backgroundColor }}
-                            
+                    <ListItem key={key} component={NavLink} to={`/challenge/${data["" + index]["2"]}`}>
+                        <Card sx={{ border: 1, borderColor: c[0], p: 2 }} style={{ backgroundColor: backgroundColor, width: "100%", minWidth: 1000 }}
                             onMouseEnter={() => this.handleMouseEnter(index)} onMouseLeave={this.handleMouseLeave}>
-                            <Stack spacing={20} direction="row" alignItems="center">
+                            <div style={{ display: "flex", justifyContent: "left", alignItems: "center", gap: 20 }}>
                                 <Avatar sx={{ backgroundColor: c[1] }}>
                                     <PestControlIcon />
                                 </Avatar>
-                                <Typography variant='body1' color={cardInnerColor} size="sm">{data["data"][""+index]["2"]}</Typography>
-                                <Typography variant='body1' color={cardInnerColor}>{data["data"][""+index]["1"]}</Typography>
+                                <Typography variant="body1" color={cardInnerColor} size="sm" style={{ flex: "1" }}>{data["" + index]["2"]}</Typography>
+                                <Typography variant="body1" color={cardInnerColor} style={{ flex: "1" }}>{data["" + index]["1"]}</Typography>
                                 <CheckCircleOutlineIcon sx={{ color: cardInnerColor }} />
                                 <PanoramaFishEyeIcon sx={{ color: cardInnerColor }} />
-                            </Stack>
+                            </div>
                         </Card>
                     </ListItem>
                 );
@@ -94,9 +93,39 @@ class ChallengeList extends React.Component {
                         {list()}
                     </List>
                 </div>
+
             </div>
         );
     }
 }
 
 export default ChallengeList;
+
+/* const list = () => {
+    const challenges = [];
+    Object.keys(data).map((key, index) => {
+        const c = this.state.cardColors[index % this.state.cardColors.length]
+        const isExpanded = index === this.state.expandedCardIndex;
+        const backgroundColor = isExpanded ? this.state.cardColors[index % this.state.cardColors.length][1] : 'transparent';
+        const cardInnerColor = isExpanded ? 'black' : 'white'
+        challenges.push(
+            <ListItem key={key} component={NavLink} to={`/challenge/${data["data"][""+index]["2"]}`}>
+                <Card sx={{ border: 1, borderColor: c[0] , p: 2}} style={{ backgroundColor: backgroundColor }}
+                    
+                    onMouseEnter={() => this.handleMouseEnter(index)} onMouseLeave={this.handleMouseLeave}>
+                    <Stack spacing={20} direction="row" alignItems="center">
+                        <Avatar sx={{ backgroundColor: c[1] }}>
+                            <PestControlIcon />
+                        </Avatar>
+                        <Typography variant='body1' color={cardInnerColor} size="sm">{data["data"][""+index]["2"]}</Typography>
+                        <Typography variant='body1' color={cardInnerColor}>{data["data"][""+index]["1"]}</Typography>
+                        <CheckCircleOutlineIcon sx={{ color: cardInnerColor }} />
+                        <PanoramaFishEyeIcon sx={{ color: cardInnerColor }} />
+                    </Stack>
+                </Card>
+            </ListItem>
+        );
+    });
+    return challenges;
+};
+ */

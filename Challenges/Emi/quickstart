@@ -1,4 +1,4 @@
 #!/bin/bash
 
 docker build -t emi docker_images/
-docker run -it --rm --privileged -p 5000:5000 emi
+docker run -it --rm --privileged -p 5004:5004 emi
