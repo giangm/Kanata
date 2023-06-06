@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useParams } from 'react-router-dom';
 import { Box, Typography, Container, Paper, Button, Accordion, Fab, AccordionSummary, AccordionDetails } from '@mui/material';
+import { NavLink } from "react-router-dom";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -8,12 +9,17 @@ import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import Hints from '../components/Hints';
 import Solutions from '../components/Solutions';
 
+import './css/Challenge.css'
+
 export default function Challenge() {
     const { id } = useParams();
 
     return (
-        <Container sx={{paddingTop: '2em', display: 'flex', height: '100vh', width: "100vw", overflow: 'scroll' }}>
-            <Box>
+        <Container sx={{ py: '4em', height: '100vh', minWidth: "100vw", overflow: 'scroll' }}>
+            <Button className="btn-white" component={NavLink} to="/">
+                Home
+            </Button>
+            <Box sx={{ px: '15em' }}>
                 <Typography sx={{ textAlign: 'center' }} variant="h1" component="h1" gutterBottom>
                     {id}
                 </Typography>
@@ -76,7 +82,7 @@ export default function Challenge() {
                         <Typography variant="h6">Hints</Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-                        <Hints name={id}/>
+                        <Hints name={id} />
                     </AccordionDetails>
                 </Accordion>
 
@@ -89,7 +95,7 @@ export default function Challenge() {
                         <Typography variant="h6">Solutions</Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-                        <Solutions name={id}/>
+                        <Solutions name={id} />
                     </AccordionDetails>
                 </Accordion>
             </Box>
