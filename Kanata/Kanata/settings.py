@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'app.apps.AppConfig',
-    'drf_yasg'
+    'drf_yasg',
+    'imagekit'
 ]
 
 MIDDLEWARE = [

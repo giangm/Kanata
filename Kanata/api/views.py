@@ -27,19 +27,29 @@ class ChallengeListView(APIView):
 
         return Response({"data": containers}, status=status.HTTP_200_OK)
 
-class ChallengeInfoView(APIView):
+class ChallengeSolution(APIView):
     def get(self, request, format=None):
+        name = request.query_params.get('name')
         base_dir = os.path.abspath(os.path.join(settings.BASE_DIR, os.pardir))
         chall_dir = os.path.join(base_dir, 'Challenges', request.query_params.get('name'), 'documentation')
 
+        num = len([f for f in os.listdir(chall_dir + '/images/') if os.path.isfile(os.path.join(chall_dir + '/images/', f))])
+
         with open(chall_dir + '/solution.md', 'r') as f:
             content = f.read()
-            images_dir = os.path.join(chall_dir, 'images')
-            new_content = re.sub(r'!\[\]\(images/', f'![]({images_dir}/', content)
+            for i in range(1, num + 1):
+                image = f'http://localhost:8000/images/{i}?name={name}'
+                content = re.sub(r'!\[\]\(images/' + f'{i}.png', f'![]({image}/', content)
 
-        print(new_content)
+        return Response({"data": content}, status=status.HTTP_200_OK)
 
-        # html = markdown.markdown(content)
-        return Response({"data": new_content}, status=status.HTTP_200_OK)
+class ChallengeHints(APIView):
+    def get(self, request, format=None):
+        name = request.query_params.get('name')
+        base_dir = os.path.abspath(os.path.join(settings.BASE_DIR, os.pardir))
+        chall_dir = os.path.join(base_dir, 'Challenges', request.query_params.get('name'), 'documentation')
 
-        # os.path.join(BASE_DIR, 'frontend', "build", "static")
+        with open(chall_dir + '/hint.md', 'r') as f:
+            content = f.read()
+        
+        return Response({"data": content}, status=status.HTTP_200_OK)

@@ -113,7 +113,7 @@ export default function Challenge() {
     const { id } = useParams();
 
     return (
-        <Container maxWidth="md" sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+        <Container maxWidth="md" sx={{paddingTop: '2em', display: 'flex', height: '100vh', width: "100vw", overflow: 'scroll' }}>
             <Box>
                 <Typography sx={{ textAlign: 'center' }} variant="h1" component="h1" gutterBottom>
                     {id}
@@ -168,7 +168,7 @@ export default function Challenge() {
                     </Typography>
                 </Paper>
 
-                <Accordion sx={{ my: 2 }}>
+                <Accordion >
                     <AccordionSummary
                         expandIcon={<ExpandMoreIcon />}
                         aria-controls="panel1a-content"
@@ -177,11 +177,11 @@ export default function Challenge() {
                         <Typography variant="h6">Hints</Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-                        <Hints />
+                        <Hints name={id}/>
                     </AccordionDetails>
                 </Accordion>
 
-                <Accordion sx={{ my: 2 }}>
+                <Accordion>
                     <AccordionSummary
                         expandIcon={<ExpandMoreIcon />}
                         aria-controls="panel2a-content"
