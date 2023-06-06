@@ -1,7 +1,7 @@
 FROM python:3.8-slim-buster
 
 LABEL name="Chika"
-# LABEL desc="This challenge addresses Stored Cross-Site Scripting"
+LABEL desc="This challenge addresses Business Logic Failure"
 
 WORKDIR /app
 
