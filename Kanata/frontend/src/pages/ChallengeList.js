@@ -7,7 +7,6 @@ import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
-import Stack from '@mui/material/Stack';
 import Avatar from '@mui/material/Avatar';
 
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
@@ -64,7 +63,7 @@ class ChallengeList extends React.Component {
                 const cardInnerColor = isExpanded ? 'black' : 'white'
                 challenges.push(
                     <ListItem key={key} component={NavLink} to={`/challenge/${data["" + index]["2"]}`}>
-                        <Card sx={{ border: 1, borderColor: c[0], p: 2 }} style={{ backgroundColor: backgroundColor, width: "100%", minWidth: 1000 }}
+                        <Card sx={{ border: 1, borderColor: c[0], p: 2 }} style={{ backgroundColor: backgroundColor, width: "100%", minWidth: 1000, border: 1, borderColor: c[0], p:2 }}
                             onMouseEnter={() => this.handleMouseEnter(index)} onMouseLeave={this.handleMouseLeave}>
                             <div style={{ display: "flex", justifyContent: "left", alignItems: "center", gap: 20 }}>
                                 <Avatar sx={{ backgroundColor: c[1] }}>
@@ -78,6 +77,7 @@ class ChallengeList extends React.Component {
                         </Card>
                     </ListItem>
                 );
+                return 0;
             });
             return challenges;
         };
