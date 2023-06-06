@@ -1,6 +1,8 @@
 # Kanata
 
-Kanata is a suite of <ins>**vulnerable by design**</ins> web applications that aims to provide a platform for students to learn and practice white-box testing approaches in a safe and legal environment.
+Kanata is a suite of vulnerable by design web applications that provides a safe and legal environment for students to learn and practice white-box testing approaches. Kanata equips students with the skills they need to identify vulnerabilities in web applications and build effective security mitigations.
+
+Students are presented with a range of web applications that simulate real-world scenarios, allowing them to apply their knowledge in a practical setting. By working through these challenges, students gain hands-on experience with common security threats and learn how to develop effective mitigation strategies.
 
 ## Features
 
