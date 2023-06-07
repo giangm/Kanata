@@ -38,28 +38,12 @@ class ChallengeListView(APIView):
         serializer = self.serializer_class(queryset, many=True)
         return Response({"data": serializer.data}, status=status.HTTP_200_OK)
 
-    
-    # def get(self, request, format=None):
-        
-    #     containers = {}
-    #     counter = 0
-    #     for container in client.containers.list():
-    #         print(container)
-    #         nickname = container.name
-    #         labels = container.labels
-    #         cstatus = container.status
-    #         short_id = container.short_id
-    #         attrs = container.attrs
-
-    #         containers[counter] = [nickname, cstatus, labels["name"], labels["desc"], short_id, attrs]
-    #         counter += 1
-        # serializer = self.serializer_class(self.queryset, many=True)
-        # return Response({"data": serializer.data}, status=status.HTTP_200_OK)
-        # return Response({"data": self.queryset}, status=status.HTTP_200_OK)
-
 class ChallengeSolution(APIView):
     def get(self, request, format=None):
         name = request.query_params.get('name')
+        if name == "":
+            return Response({"data": "The name parameter cannot be empty."}, status=status.HTTP_404_NOT_FOUND)
+        
         base_dir = os.path.abspath(os.path.join(settings.BASE_DIR, os.pardir))
         chall_dir = os.path.join(base_dir, 'Challenges', request.query_params.get('name'), 'documentation')
 
@@ -75,8 +59,12 @@ class ChallengeSolution(APIView):
 
 class ChallengeHints(APIView):
     def get(self, request, format=None):
+        name = request.query_params.get('name')
+        if name == "":
+            return Response({"data": "The name parameter cannot be empty."}, status=status.HTTP_404_NOT_FOUND)
+        
         base_dir = os.path.abspath(os.path.join(settings.BASE_DIR, os.pardir))
-        chall_dir = os.path.join(base_dir, 'Challenges', request.query_params.get('name'), 'documentation')
+        chall_dir = os.path.join(base_dir, 'Challenges', name, 'documentation')
 
         with open(chall_dir + '/hint.md', 'r') as f:
             content = f.read()
@@ -86,12 +74,18 @@ class ChallengeHints(APIView):
 class StopChallenge(APIView):
     def get(self, request, format=None):
         name = request.query_params.get('name')
+        if name == "":
+            return Response({"data": "The name parameter cannot be empty."}, status=status.HTTP_404_NOT_FOUND)
+        
         container = Container.objects.get(name=name)
         serializer = ContainerSerializer(container)
+        
         id = serializer.data["short_id"]
         docker_container = client.containers.get(id)
         docker_container.stop()
+        
         container_model = Container.objects.get(name=name)
         container_model.delete()
+        
         return Response({"data": "hi"}, status=status.HTTP_200_OK)
 
