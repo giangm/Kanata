@@ -34,7 +34,7 @@ class ChallengeList extends React.Component {
     componentDidMount() {
         axios.get("http://localhost:8000/api/challengelist").then(response => {
             this.setState({ data: response.data["data"] });
-            //console.log(response.data);
+            console.log(response.data["data"][0]["name"]);
         })
     }
 
@@ -62,15 +62,15 @@ class ChallengeList extends React.Component {
                 const backgroundColor = isExpanded ? this.state.cardColors[index % this.state.cardColors.length][1] : 'transparent';
                 const cardInnerColor = isExpanded ? 'black' : 'white'
                 challenges.push(
-                    <ListItem key={key} component={NavLink} to={`/challenge/${data["" + index]["2"]}`}>
+                    <ListItem key={key} component={NavLink} to={`/challenge/${data[index]["name"]}`}>
                         <Card sx={{ border: 1, borderColor: c[0], p: 2 }} style={{ backgroundColor: backgroundColor, width: "100%", minWidth: 1000, border: 1, borderColor: c[0], p:2 }}
                             onMouseEnter={() => this.handleMouseEnter(index)} onMouseLeave={this.handleMouseLeave}>
                             <div style={{ display: "flex", justifyContent: "left", alignItems: "center", gap: 20 }}>
                                 <Avatar sx={{ backgroundColor: c[1] }}>
                                     <PestControlIcon />
                                 </Avatar>
-                                <Typography variant="body1" color={cardInnerColor} size="sm" style={{ flex: "1" }}>{data["" + index]["2"]}</Typography>
-                                <Typography variant="body1" color={cardInnerColor} style={{ flex: "1" }}>{data["" + index]["1"]}</Typography>
+                                <Typography variant="body1" color={cardInnerColor} size="sm" style={{ flex: "1", textAlign: "center" }}>{data[index]["name"]}</Typography>
+                                <Typography variant="body1" color={cardInnerColor} style={{ flex: "1", textAlign: "center", textTransform: "capitalize" }}>{data[index]["status"]}</Typography>
                                 <CheckCircleOutlineIcon sx={{ color: cardInnerColor }} />
                                 <PanoramaFishEyeIcon sx={{ color: cardInnerColor }} />
                             </div>

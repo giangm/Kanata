@@ -29,4 +29,4 @@ Looking at the `updatePassword()` function, it is confirmed that there is no ste
 
 ![](images/6.png)
 ## Putting Everything Together
-Taking the information gathered from reading the code, it is possible to draw a conclusion that there is a vulnerability in both the application's `changePassword` process and `ping` process. These functions can be used in tandem to allow any user to first change the admin user's password, then log in as admin to perform command injection on the application's system by taking advantage of the insecure use of the `exec.Command` function. **more info**
+Taking the information gathered from reading the code, it is possible to draw a conclusion that there is a vulnerability in both the application's `changePassword` process and `ping` process. These functions can be used in tandem to allow any user to first change the admin user's password, then log in as admin to perform command injection on the application's system by taking advantage of the insecure use of the `exec.Command` function.

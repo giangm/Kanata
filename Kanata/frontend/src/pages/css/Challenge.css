@@ -67,3 +67,22 @@
 	-o-transition: all 0.3s ease-out;
 	transition: all 0.3s ease-out;
 }
+
+.loading-icon {
+	width: 32px;
+	height: 32px;
+	border: 4px solid #ccc;
+	border-top-color: #333;
+	border-radius: 50%;
+	animation: spin 1s infinite linear;
+  }
+  
+  @keyframes spin {
+	0% {
+	  transform: rotate(0deg);
+	}
+	100% {
+	  transform: rotate(360deg);
+	}
+  }
+  

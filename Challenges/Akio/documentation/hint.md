@@ -1,5 +1,3 @@
-# Hints
-
 ## Hint 1
 The first hint will go in this spot, here...The first hint will go in this spot, here...The first hint will go in this spot, here...The 
 

@@ -31,7 +31,7 @@ class Solutions extends React.Component{
 	render() {
 		return (
 			<div style={{ textAlign: 'left', overflow: 'scroll', height: '50vh'}}>
-				<ReactMarkdown components={{img:({node,...props})=><img style={{maxWidth: '100%'}}{...props}/>}}>{""+this.state.data["data"]}</ReactMarkdown>
+				<ReactMarkdown components={{img:({node,...props})=><img style={{maxWidth: '65%'}}{...props}/>}}>{""+this.state.data["data"]}</ReactMarkdown>
 			</div>
 		);
 	}

@@ -2,7 +2,7 @@ from django.urls import path
 from rest_framework.permissions import AllowAny
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
-from .views import ChallengeListView, ChallengeSolution, ChallengeHints
+from .views import ChallengeListView, ChallengeSolution, ChallengeHints, StopChallenge
 
 schema_view = get_schema_view(
     openapi.Info(
@@ -18,5 +18,6 @@ urlpatterns = [
     path('', schema_view.with_ui('swagger', cache_timeout=0)),
     path('challengelist', ChallengeListView.as_view()),
     path('challengesolution', ChallengeSolution.as_view()),
-    path('challengehint', ChallengeHints.as_view())
+    path('challengehint', ChallengeHints.as_view()),
+    path('stopchallenge', StopChallenge.as_view())
 ]

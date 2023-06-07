@@ -9,7 +9,7 @@ import './App.css';
 import Particles from 'react-tsparticles';
 import { particlesConfig } from './particles-config';
 import { loadSlim } from 'tsparticles-slim'
-
+import SideHeader from './components/SideHeader';
 
 
 function App() {
@@ -22,6 +22,7 @@ function App() {
       <ThemeProvider theme={Theme}>
         <div className="App">
           <Particles options={particlesConfig} init={particlesInit}/>
+          {/* <SideHeader/> */}
           <Routes>
             <Route path="/" exact element={<ChallengeList />} />
             <Route path="/challenge/:id" element={<Challenge />} />
