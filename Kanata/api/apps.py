@@ -1,15 +1,21 @@
 from django.apps import AppConfig
+from docker.errors import DockerException
+import sys
 import docker
 
 
 class ApiConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
     name = 'api'
-    client = docker.from_env()
 
     def ready(self):  
-        from .models import Container  
-        for container in self.client.containers.list():
+        from .models import Container
+        try:
+            client = docker.from_env()
+        except DockerException as e:
+            print("Please ensure that Docker Engine is running!")
+            sys.exit(-1)
+        for container in client.containers.list():
             nickname = container.name
             labels = container.labels
             cstatus = container.status

@@ -5,11 +5,17 @@ from rest_framework.response import Response
 from rest_framework import status
 from .serializers import ContainerSerializer
 from .models import Container
+from docker.errors import DockerException
 import docker
 import os
 import re
+import sys
 
-client = docker.from_env()
+try:
+    client = docker.from_env()
+except DockerException as e:
+    print("Please ensure that Docker Engine is running!")
+    sys.exit(-1)
 
 # Create your views here.
 class ChallengeListView(APIView):
