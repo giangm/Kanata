@@ -14,7 +14,6 @@ detailsRouter.get('', async(req, res) => {
     var template = 'Hello ' + req.query.username;
     var html = ejs.render(template);
     res.send(html);
-    // res.render('create')   
 })
 
 
