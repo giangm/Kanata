@@ -1,0 +1,214 @@
+{
+  "news": [
+    {
+      "id": "1",
+      "title": "New Breakthrough in AI Research",
+      "date": "2023-06-16",
+      "description": "Scientists from the University of X have announced a major breakthrough in artificial intelligence research...",
+      "author": "John Doe",
+      "tags": [
+        "AI",
+        "research",
+        "science",
+        "technology"
+      ],
+      "source": "Tech Daily News"
+    },
+    {
+      "id": "2",
+      "title": "Global Climate Change March Draws Thousands",
+      "date": "2023-06-15",
+      "description": "Thousands of activists marched in major cities across the globe to raise awareness about climate change...",
+      "author": "Jane Smith",
+      "tags": [
+        "climate change",
+        "activism",
+        "environment",
+        "global"
+      ],
+      "source": "Global Environment News"
+    },
+    {
+      "id": "3",
+      "title": "New Vaccine Shows Promise in Clinical Trials",
+      "date": "2023-06-14",
+      "description": "Pharmaceutical company Y announced that their new vaccine has shown significant results in early-stage clinical trials...",
+      "author": "Robert Davis",
+      "tags": [
+        "health",
+        "medicine",
+        "pharma",
+        "vaccine"
+      ],
+      "source": "Health & Medicine Weekly"
+    },
+    {
+      "id": "4",
+      "title": "Start-up XYZ Raises $100M in Series B",
+      "date": "2023-06-17",
+      "description": "Start-up XYZ, a tech company focusing on IoT solutions, has raised $100M in their latest Series B funding...",
+      "author": "Mark Thompson",
+      "tags": [
+        "start-up",
+        "funding",
+        "IoT",
+        "business"
+      ],
+      "source": "Business Daily"
+    },
+    {
+      "id": "5",
+      "title": "Mars Rover Sends New Photos of Red Planet",
+      "date": "2023-06-17",
+      "description": "The latest photos from the Mars Rover reveal fascinating details about the Martian landscape...",
+      "author": "Susan Baker",
+      "tags": [
+        "Mars",
+        "rover",
+        "space",
+        "science"
+      ],
+      "source": "Space Today"
+    },
+    {
+      "id": "6",
+      "title": "Major Earthquake Strikes Coastal City",
+      "date": "2023-06-17",
+      "description": "A major earthquake of 7.5 magnitude struck a coastal city today causing significant damage...",
+      "author": "Brian Stewart",
+      "tags": [
+        "earthquake",
+        "disaster",
+        "city",
+        "news"
+      ],
+      "source": "Global News Network"
+    },
+    {
+      "id": "7",
+      "title": "New Study Reveals the Effects of Climate Change on Wildlife",
+      "date": "2023-06-16",
+      "description": "A recent study reveals the devastating impact of climate change on local wildlife populations...",
+      "author": "Nancy Williams",
+      "tags": [
+        "climate change",
+        "wildlife",
+        "study",
+        "environment"
+      ],
+      "source": "Science Weekly"
+    },
+    {
+      "id": "8",
+      "title": "Historic Peace Agreement Signed",
+      "date": "2023-06-15",
+      "description": "A historic peace agreement was signed today between two countries, marking an end to decades-long conflict...",
+      "author": "Richard Johnson",
+      "tags": [
+        "peace",
+        "agreement",
+        "politics",
+        "world"
+      ],
+      "source": "Political Updates"
+    },
+    {
+      "id": "9",
+      "title": "World-renowned Chef Opens New Restaurant",
+      "date": "2023-06-14",
+      "description": "World-renowned Chef, John Doe, opens his new restaurant in New York City, promising an unforgettable culinary experience...",
+      "author": "Emily Brown",
+      "tags": [
+        "chef",
+        "restaurant",
+        "food",
+        "lifestyle"
+      ],
+      "source": "Food and Life"
+    },
+    {
+      "id": "10",
+      "title": "New Technological Breakthrough in Renewable Energy",
+      "date": "2023-06-13",
+      "description": "Engineers from the University of XYZ have announced a major breakthrough in renewable energy technology...",
+      "author": "David Wilson",
+      "tags": [
+        "technology",
+        "breakthrough",
+        "renewable energy",
+        "science"
+      ],
+      "source": "Tech Review"
+    },
+    {
+      "id": "11",
+      "title": "Blockbuster Movie Breaks Box Office Records",
+      "date": "2023-06-12",
+      "description": "The newly released movie 'Blockbuster' has broken all previous box office records...",
+      "author": "Jennifer Taylor",
+      "tags": [
+        "movie",
+        "box office",
+        "entertainment",
+        "film"
+      ],
+      "source": "Entertainment Now"
+    },
+    {
+      "id": "12",
+      "title": "Innovative Architecture Redefining City Skylines",
+      "date": "2023-06-11",
+      "description": "An innovative architectural firm is redefining city skylines with its futuristic building designs...",
+      "author": "Jacob Miller",
+      "tags": [
+        "architecture",
+        "design",
+        "city",
+        "innovation"
+      ],
+      "source": "Design Trends"
+    },
+    {
+      "id": "13",
+      "title": "Astronomers Discover New Exoplanet",
+      "date": "2023-06-10",
+      "description": "Astronomers from the National Space Agency have discovered a new exoplanet in the 'habitable zone'...",
+      "author": "Charlotte Anderson",
+      "tags": [
+        "astronomy",
+        "exoplanet",
+        "discovery",
+        "space"
+      ],
+      "source": "Space Explorer"
+    },
+    {
+      "id": "14",
+      "title": "New Legislation Aims to Protect Online Privacy",
+      "date": "2023-06-09",
+      "description": "A new bill introduced in the senate aims to bolster online privacy rights for consumers...",
+      "author": "Zachary Thomas",
+      "tags": [
+        "legislation",
+        "online privacy",
+        "politics",
+        "law"
+      ],
+      "source": "Legal Insight"
+    },
+    {
+      "id": "15",
+      "title": "Rare Bird Species Spotted After Years",
+      "date": "2023-06-08",
+      "description": "The rare 'Phoenix' bird species has been spotted in the wild after many years, giving hope to conservationists...",
+      "author": "Madison Jackson",
+      "tags": [
+        "bird",
+        "species",
+        "wildlife",
+        "conservation"
+      ],
+      "source": "Wildlife Watch"
+    }
+  ]
+}

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/main.css">
+    <title>Breaking News</title>
+</head>
+<body class="container">
+    <div class="box">
+    <h2>Create a News Post</h2>
+    <form action="/create" method="POST">
+        <label for="title">Title:</label><br>
+        <input type="text" id="title" name="title" required><br>
+
+        <label for="description">Description:</label><br>
+        <textarea id="description" name="description" required></textarea><br>
+
+        <label for="source">Source:</label><br>
+        <input type="text" id="source" name="source" required><br>
+
+        <label for="tags">Tags:</label><br>
+        <select name="tags" id="tags" multiple>
+            <option value="AI">AI</option>
+            <option value="research">research</option>
+            <option value="science">science</option>
+            <option value="technology">technology</option>
+            <option value="climate change">climate change</option>
+            <option value="activism">activism</option>
+            <option value="environment">environment</option>
+            <option value="global">global</option>
+            <option value="health">health</option>
+            <option value="medicine">medicine</option>
+            <option value="pharma">pharma</option>
+            <option value="vaccine">vaccine</option>
+            <option value="start-up">start-up</option>
+            <option value="funding">funding</option>
+            <option value="IoT">IoT</option>
+            <option value="business">business</option>
+            <option value="Mars">Mars</option>
+            <option value="rover">rover</option>
+            <option value="space">space</option>
+            <option value="earthquake">earthquake</option>
+            <option value="disaster">disaster</option>
+            <option value="city">city</option>
+            <option value="news">news</option>
+            <option value="wildlife">wildlife</option>
+            <option value="study">study</option>
+            <option value="peace">peace</option>
+            <option value="agreement">agreement</option>
+            <option value="politics">politics</option>
+            <option value="world">world</option>
+            <option value="chef">chef</option>
+            <option value="restaurant">restaurant</option>
+            <option value="food">food</option>
+            <option value="lifestyle">lifestyle</option>
+            <option value="breakthrough">breakthrough</option>
+            <option value="renewable energy">renewable energy</option>
+            <option value="movie">movie</option>
+            <option value="box office">box office</option>
+            <option value="entertainment">entertainment</option>
+            <option value="film">film</option>
+            <option value="architecture">architecture</option>
+            <option value="design">design</option>
+            <option value="innovation">innovation</option>
+            <option value="astronomy">astronomy</option>
+            <option value="exoplanet">exoplanet</option>
+            <option value="discovery">discovery</option>
+            <option value="legislation">legislation</option>
+            <option value="online privacy">online privacy</option>
+            <option value="law">law</option>
+            <option value="bird">bird</option>
+            <option value="species">species</option>
+            <option value="conservation">conservation</option>
+        </select><br>
+        
+        <button type="submit">Create Post</button>
+    </form>
+    </div>
+</body>
+</html>

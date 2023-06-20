@@ -1,0 +1,16 @@
+    <%- include('partials/header') %>
+    <% if (articles) { %>
+      <% articles.forEach(function(article, index) { %>
+        <div>
+            <h2><%= article.title %></h2>
+            <p><%= article.tags %></p>
+            <p><%= article.date %></p>
+            <p><%= article.author %></p>
+            <p><%= article.description %></p>
+            <p><%= article.source %></p>
+        </div>
+      <% }) %>
+    <% } %>
+    </section>
+</body>
+</html>
