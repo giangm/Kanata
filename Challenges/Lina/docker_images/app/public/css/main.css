@@ -1,0 +1,124 @@
+body {
+    margin: 0;
+    background-color: rgba(29, 59, 88, 0.5);
+}
+
+.wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-content: flex-start;
+    width: 100vw;
+    height: 100vh;
+    overflow: auto;
+}
+
+.wrapper div {
+    width: 100vw;
+    height: 15vh;
+    margin: 5px;
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 4em;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+nav li {
+    display: inline-block;
+}
+
+nav a {
+    display: block;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: #333;
+}
+
+nav a:hover {
+    background-color: #ddd;
+}
+
+nav .active {
+    background-color: #ccc;
+}  
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.form, .box {
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    width: 300px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+  
+label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+  
+input[type="text"], input[type="password"] {
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+  
+button[type="submit"], button[type="button"] {
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-top: 1em;
+}
+
+.card-link {
+    text-decoration: none !important;
+}
+
+.card-link:visited {
+    color: inherit;
+}
+  
+.card {
+    display: flex;
+    flex-direction: column;
+    width:  100%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+.card-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.card-date {
+    font-size: 14px;
+    color: #888;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+  

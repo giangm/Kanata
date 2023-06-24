@@ -1,0 +1,4 @@
+#!/bin/bash
+
+docker build -t lina docker_images/
+docker run -it --rm --privileged -p 5106:5106 lina

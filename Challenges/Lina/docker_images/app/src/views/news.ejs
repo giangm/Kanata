@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/main.css">
+    <title>Breaking News</title>
+</head>
+<body>
+  <section class="wrapper">
+    <%- include('partials/navbar') %>
+    <% if (articles) { %>
+      <% if (error) { %>
+        <div class="card">
+          <h3 class="card-title">Uh oh :(</h3>
+          <p><%= error %></p>
+        </div>
+      <% } %>
+      <% articles.forEach(function(article, index) { %>
+        <a href="/news?id=<%= article.id %>" class="card-link">
+          <div class="card">
+              <h3 class="card-title"><%= article.title %></h3>
+              <p class="card-date"><%= article.date %> | <%= article.author %></p>
+              <% if (article.description) { %>
+                <p><%= article.tags %> | <%= article.source %></p>
+                <p><%= article.description %></p>
+                <p></p>
+              <% } %>
+          </div>
+        </a>
+      <% }) %>
+    <% } %>
+    </section>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/main.css">
+    <title>Breaking News</title>
+</head>
+<body>
+    <%- include('partials/navbar') %>
+    <div class="container">
+        <div class="form">
+            <form action="/profile" method="POST" id="profile">
+                <input type="hidden" id="id" name="id" value="<%= user.id %>">
+                <label for="username">Username: <%= user.username %></label>
+                <input type="hidden" id="username" name="username" value="<%= user.username %>">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+    <script src="/js/main.js"></script>
+</body>
+</html>
