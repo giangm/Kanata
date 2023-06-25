@@ -1,7 +1,7 @@
 FROM node:18
 
 LABEL name="Fumika"
-LABEL desc="This challenge address EJS Server-Side Template Injection"
+LABEL desc="This challenge addresses EJS Server-Side Template Injection"
 
 RUN apt-get update && apt-get install -y netcat-traditional
 
