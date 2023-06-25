@@ -1,5 +1,8 @@
 FROM node:18
 
+LABEL name="Fumika"
+LABEL desc="This challenge address EJS Server-Side Template Injection"
+
 RUN apt-get update && apt-get install -y netcat-traditional
 
 WORKDIR /usr/src/app
