@@ -1,6 +1,6 @@
 FROM node:18
 
-LABEL name="Lina"
+LABEL name="Jun"
 LABEL desc="This challenge addresses Command Injection - Space Bypass"
 
 RUN apt-get update && apt-get install -y iputils-ping
