@@ -59,7 +59,6 @@ module.exports = {
     update: (id, data) => {
         const user = users.find(user => user.id === id);
         Object.assign(user, data);
-        console.log(users)
     },
     getPassword: (id) => {
         const user = users.find(user => user.id === id)
