@@ -1,7 +1,7 @@
 FROM php:7.4-apache
 
 LABEL name="Fumiko"
-LABEL desc="This challenge address Remote File Inclusion"
+LABEL desc="This challenge addresses Remote File Inclusion"
 
 WORKDIR /var/www/html
 
