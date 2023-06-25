@@ -1,25 +1,12 @@
 <?php
+session_start();
+if (isset($_SESSION['username'])) {
+    require_once '/var/www/html/controllers/Index.php';
 
-if(isset($_GET['lang'])) {
-    $lang = $_GET['lang'];
-    include($lang);
+    $indexController = new Index();
+    $indexController->render();
 } else {
-    $url = $_SERVER['REQUEST_URI'] . 'index.php?lang=stories/en.txt';
-    header('Location: ' . $url);
+    header('Location: login.php');
+    exit();
 }
 ?>
-
-
-<!DOCTYPE html>
-<html>
-<head>
-</head>
-<body>
-    <p>Select your language:</p>
-    <ul>
-        <li><a href="?lang=stories/en.txt">English</a></li>
-        <li><a href="?lang=stories/es.txt">Spanish</a></li>
-        <li><a href="?lang=stories/fr.txt">French</a></li>
-    </ul>
-</body>
-</html>
