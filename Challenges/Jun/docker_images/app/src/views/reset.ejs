@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="/css/reset.css">
+  <title>Reset Password</title>
+</head>
+<body>
+  <div class="password-form-container">
+    <h2>Change Password</h2>
+    <form class="password-form" action="/reset" method="post">
+      <input type="hidden" id="id" name="id" value="<%= user.id %>">
+      <label for="username">Username: <%= user.username %></label>
+      <input type="hidden" id="username" name="username" value="<%= user.username %>">
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required>
+      <input type="hidden" id="type" name="type" value="<%= user.type %>">
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</body>
+</html>
