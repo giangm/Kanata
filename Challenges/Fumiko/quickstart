@@ -1,0 +1,4 @@
+#!/bin/bash
+
+docker build -t fumiko docker_images/
+docker run -it --rm --privileged -p 5104:80 fumiko
