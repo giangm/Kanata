@@ -1,14 +1,15 @@
 const express = require('express')
+const authRequired = require('../../authentication')
 const loginRouter = express.Router()
 const passport = require('passport')
 
-loginRouter.post('', passport.authenticate('local', {
+loginRouter.post('', authRequired.notAuthenticated, passport.authenticate('local', {
     successRedirect: '/',
     failureRedirect: '/login',
     failureFlash: true
 }))
 
-loginRouter.get('', async(req, res) => {
+loginRouter.get('', authRequired.notAuthenticated, async(req, res) => {
     res.render('login')   
 })
 
