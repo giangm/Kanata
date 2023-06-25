@@ -1,7 +1,7 @@
 FROM php:7.4-apache
 
 LABEL name="Beniko"
-LABEL desc="This challenge address Local File Inclusion - Log File Contamination"
+LABEL desc="This challenge addresses Local File Inclusion - Log File Contamination"
 
 WORKDIR /var/www/html
 
