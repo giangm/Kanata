@@ -6,6 +6,7 @@ from rest_framework import status
 from .serializers import ContainerSerializer
 from .models import Container
 from docker.errors import DockerException
+from django.db import IntegrityError
 import docker
 import os
 import re
@@ -24,25 +25,60 @@ class ChallengeListView(APIView):
     def get_queryset(self):
         return Container.objects.all()
     
-    def get(self, request, format=None):
-        chall_dir = os.path.join(os.path.abspath(os.path.join(settings.BASE_DIR, os.pardir)), 'Challenges')
-        
-        for cname in os.listdir(chall_dir):
-            if cname != ".DS_Store":
-                Container.objects.get_or_create(status="stopped", name=cname)
+    def create_missing_containers(self, chall_dir):
+        existing_names = set(Container.objects.values_list('name', flat=True))
+        containers_to_create = []
 
-        for container in client.containers.list():
-            if not Container.objects.filter(name=container.labels["name"]).exists():
-                nickname = container.name
+        for cname in os.listdir(chall_dir):
+            if cname != ".DS_Store" and cname not in existing_names:
+                containers_to_create.append(Container(status="stopped", name=cname))
+
+        Container.objects.bulk_create(containers_to_create)
+
+    def update_all_containers(self, client):
+        containers = client.containers.list()
+
+        if len(containers) == 0:
+            Container.objects.update(status="stopped")
+        else:
+            existing_names = set(Container.objects.values_list('name', flat=True))
+            containers_to_create = []
+
+            for container in containers:
                 labels = container.labels
                 cstatus = container.status
+                nickname = container.name
                 short_id = container.short_id
                 attrs = container.attrs
-                Container.objects.get_or_create(nickname=nickname, status=cstatus, name=labels['name'], desc=labels['desc'], short_id=short_id, attrs=attrs)
-            
+
+                if labels["name"] in existing_names:
+                    c = Container.objects.get(name=labels["name"])
+                    c.status = cstatus
+                    c.save()
+                else:
+                    containers_to_create.append(
+                        Container(
+                            nickname=nickname,
+                            status=cstatus,
+                            name=labels['name'],
+                            desc=labels['desc'],
+                            short_id=short_id,
+                            attrs=attrs,
+                        )
+                    )
+
+            Container.objects.bulk_create(containers_to_create)
+
+    def get(self, request, format=None):
+        chall_dir = os.path.join(os.path.abspath(os.path.join(settings.BASE_DIR, os.pardir)), 'Challenges')
+
+        self.create_missing_containers(chall_dir)
+        self.update_all_containers(client)
+
         queryset = self.get_queryset()
         serializer = self.serializer_class(queryset, many=True)
         return Response({"data": serializer.data}, status=status.HTTP_200_OK)
+
 
 class ChallengeSolution(APIView):
     def get(self, request, format=None):

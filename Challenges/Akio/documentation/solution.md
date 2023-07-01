@@ -1,9 +1,4 @@
 ## main.go
-The first step to analyzing the application's codebase would be to view the program's entrypoint, which would likely be in `main.go`
-
-![](images/1.png)
-
-The initial imports, alongside the first function, `engine()` suggests that this is a web application built using Go's Gin web framework.
 ### `engine()`
 Further looking into the `engine()` function reveals the application's routing structure, which includes typical user login, logout, registration routes, alongside two groups that implement helper functions to perform checks.
 
