@@ -1,7 +1,6 @@
-import * as React from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useParams, NavLink } from 'react-router-dom';
 import { Box, Typography, Container, Paper, Button, Accordion, Fab, AccordionSummary, AccordionDetails } from '@mui/material';
-import { NavLink } from "react-router-dom";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import StopIcon from '@mui/icons-material/Stop';
@@ -11,23 +10,38 @@ import Hints from '../components/Hints';
 import Solutions from '../components/Solutions';
 import axios from 'axios';
 
-
 import './css/Challenge.css';
 
-export default function Challenge() {
+const API_ENDPOINT = 'http://localhost:8000/api';
 
+const Challenge = () => {
   const { id } = useParams();
-  const [isLoading, setIsLoading] = React.useState(false);
-  const [isResetLoading, setIsResetLoading] = React.useState(false);
-  const [isRunning, setIsRunning] = React.useState(false);
+  const [challengeDetails, setChallengeDetails] = useState('');
+  const [status, setStatus] = useState();
+  const [isLoading, setIsLoading] = useState(false);
+  const [isResetLoading, setIsResetLoading] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
 
-  const [isFavorite, setIsFavorite] = React.useState(false);
+  useEffect(() => {
+    // Fetch challenge description from API
+    const fetchChallengeDetails = async () => {
+      try {
+        const response = await axios.get(`${API_ENDPOINT}/challengedetails?name=${id}`);
+        setChallengeDetails(response.data.description);
+      } catch (error) {
+        // Handle error
+        console.error(error);
+      }
+    };
+
+    fetchChallengeDetails();
+  }, [id]);
 
   const handlePlayClick = () => {
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
-      setIsRunning(true);
+      setStatus('playing');
     }, 1500);
   };
 
@@ -35,10 +49,10 @@ export default function Challenge() {
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
-      setIsRunning(false);
+      setStatus('stopped');
     }, 1000);
-  
-    axios.get(`http://localhost:8000/api/stopchallenge?name=${id}`).then(response => {
+
+    axios.get(`${API_ENDPOINT}/stopchallenge?name=${id}`).then(response => {
       console.log(response);
     });
   };
@@ -52,10 +66,10 @@ export default function Challenge() {
 
   const handleFavClick = () => {
     setIsFavorite(isFavorite => !isFavorite);
-  }
+  };
 
   return (
-    <Container sx={{ py: '4em', height: '100vh', minWidth: "100vw", overflow: 'scroll' }}>
+    <Container sx={{ py: '4em', height: '100vh', minWidth: '100vw', overflow: 'scroll' }}>
       <Button className="btn-white" component={NavLink} to="/">
         Home
       </Button>
@@ -65,35 +79,76 @@ export default function Challenge() {
         </Typography>
         <Paper elevation={3} sx={{ p: 2, position: 'relative' }}>
           <Box sx={{ position: 'absolute', top: 16, right: 16 }}>
-            <Fab color="primary" aria-label="add" disabled={isLoading}
-              sx={{ mx: 1, border: '2px solid white', backgroundColor: 'transparent', '&:hover': {
-                  backgroundColor: 'white', '& svg': { color: 'black', },},}}
-              onClick={isRunning ? handleStopClick : handlePlayClick}>
+            <Fab
+              color="primary"
+              aria-label="add"
+              disabled={isLoading}
+              sx={{
+                mx: 1,
+                border: '2px solid white',
+                backgroundColor: 'transparent',
+                '&:hover': {
+                  backgroundColor: 'white',
+                  '& svg': { color: 'black' },
+                },
+              }}
+              onClick={status === 'playing' ? handleStopClick : handlePlayClick}
+            >
               {isLoading ? (
                 <div className="loading-icon"></div>
-              ) : isRunning ? (
+              ) : status === 'playing' ? (
                 <StopIcon sx={{ color: 'white', transition: 'color 0.3s' }} />
               ) : (
                 <PlayArrowIcon sx={{ color: 'white', transition: 'color 0.3s' }} />
               )}
             </Fab>
 
-            <Fab color="error" aria-label="restart" sx={{ mx: 1, border: '2px solid white', backgroundColor: 'transparent',
-                '&:hover': { backgroundColor: 'white', '& svg': { color: 'black', },},}} onClick={handleResetClick} disabled={!isRunning}>
-              {isResetLoading ? (<div className="loading-icon"></div>): (<RestartAltIcon sx={{ color: 'white', transition: 'color 0.3s' }} />)}
+            <Fab
+              color="error"
+              aria-label="restart"
+              sx={{
+                mx: 1,
+                border: '2px solid white',
+                backgroundColor: 'transparent',
+                '&:hover': {
+                  backgroundColor: 'white',
+                  '& svg': { color: 'black' },
+                },
+              }}
+              onClick={handleResetClick}
+              disabled={status !== 'playing'}
+            >
+              {isResetLoading ? (
+                <div className="loading-icon"></div>
+              ) : (
+                <RestartAltIcon sx={{ color: 'white', transition: 'color 0.3s' }} />
+              )}
             </Fab>
-            <Fab aria-label="favourite"
-              sx={{ mx: 1, border: '2px solid white', backgroundColor: 'transparent', '&:hover': { 
-                backgroundColor: 'white', '& svg': { color: 'red', },},}} onClick={handleFavClick}>
-              {isFavorite ? (<FavoriteIcon sx={{ color: 'red', transition: 'color 0.3s' }} />) : (<FavoriteIcon sx={{ color: 'white', transition: 'color 0.3s' }} />)}
-             
+            <Fab
+              aria-label="favourite"
+              sx={{
+                mx: 1,
+                border: '2px solid white',
+                backgroundColor: 'transparent',
+                '&:hover': {
+                  backgroundColor: 'white',
+                  '& svg': { color: 'red' },
+                },
+              }}
+              onClick={handleFavClick}
+            >
+              {isFavorite ? (
+                <FavoriteIcon sx={{ color: 'red', transition: 'color 0.3s' }} />
+              ) : (
+                <FavoriteIcon sx={{ color: 'white', transition: 'color 0.3s' }} />
+              )}
             </Fab>
           </Box>
           <Typography sx={{ textAlign: 'left' }} variant="h5" component="h2" gutterBottom>
             Challenge Description
           </Typography>
           <Typography sx={{ textAlign: 'left' }} variant="body1" gutterBottom>
-            This is where the challenge description goes...
+            {challengeDetails}
           </Typography>
         </Paper>
 
@@ -114,8 +169,9 @@ export default function Challenge() {
             <Solutions name={id} />
           </AccordionDetails>
         </Accordion>
+
         <Accordion>
-          <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel2a-content" id="panel2a-header">
+          <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel3a-content" id="panel3a-header">
             <Typography variant="h6">Video Solution</Typography>
           </AccordionSummary>
           <AccordionDetails>
@@ -125,4 +181,6 @@ export default function Challenge() {
       </Box>
     </Container>
   );
-}
+};
+
+export default Challenge;

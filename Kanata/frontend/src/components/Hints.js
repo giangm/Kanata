@@ -12,19 +12,10 @@ class Hints extends Component {
 		data: [],
 	};
 
-	componentDidMount() {
-        axios.get(`http://localhost:8000/api/challengehint?name=${this.props.name}`).then(response => {
-            this.setState({ data: response.data});
-			console.log(this.state.data);
-			/*
-            console.log(this.state.data["data"]["0"]["0"]) */
-        })
-    }
-
 	render() {
 		return (
 			<div style={{ textAlign: 'left', overflow: 'scroll'}}>
-				<ReactMarkdown>{""+this.state.data["data"]}</ReactMarkdown>
+				<ReactMarkdown>{""+this.props.hints}</ReactMarkdown>
 			</div>
 		);
 	}
