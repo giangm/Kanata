@@ -40,4 +40,3 @@ class Solutions extends React.Component{
 };
 
 export default Solutions;
-
