@@ -1,165 +1,67 @@
-from django.shortcuts import render
+import re
+
 from django.conf import settings
+from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from .serializers import ContainerSerializer
-from .models import Container
-from docker.errors import DockerException
-from django.shortcuts import get_object_or_404
-import docker
-import os
-import re
-import sys
 
-try:
-    client = docker.from_env()
-except DockerException as e:
-    print("Please ensure that Docker Engine is running!")
-    sys.exit(-1)
+from .containers import *
+from .serializers import ContainerSerializer
 
 # Create your views here.
-class ChallengeListView(APIView):
-    serializer_class = ContainerSerializer
-    
-    def get_queryset(self):
-        return Container.objects.all()
-    
-    def create_missing_containers(self, chall_dir):
-        existing_names = set(Container.objects.values_list('name', flat=True))
-        containers_to_create = []
-
-        for cname in os.listdir(chall_dir):
-            if cname != ".DS_Store" and cname not in existing_names:
-                containers_to_create.append(Container(status="stopped", name=cname))
-
-        Container.objects.bulk_create(containers_to_create)
-
-    def update_all_containers(self, client):
-        containers = client.containers.list()
-
-        if len(containers) == 0:
-            Container.objects.update(status="stopped")
-        else:
-            existing_names = set(Container.objects.values_list('name', flat=True))
-            containers_to_create = []
-
-            for container in containers:
-                labels = container.labels
-                cstatus = container.status
-                nickname = container.name
-                short_id = container.short_id
-                attrs = container.attrs
-
-                if labels["name"] in existing_names:
-                    c = Container.objects.get(name=labels["name"])
-                    c.status = cstatus
-                    c.save()
-                else:
-                    containers_to_create.append(
-                        Container(
-                            nickname=nickname,
-                            status=cstatus,
-                            name=labels['name'],
-                            desc=labels['desc'],
-                            short_id=short_id,
-                            attrs=attrs,
-                        )
-                    )
-
-            Container.objects.bulk_create(containers_to_create)
+class List(APIView):
+    serializer = ContainerSerializer
 
     def get(self, request, format=None):
-        chall_dir = os.path.join(os.path.abspath(os.path.join(settings.BASE_DIR, os.pardir)), 'Challenges')
+        dir = os.path.join(os.path.abspath(os.path.join(settings.BASE_DIR, os.pardir)), "Challenges")
 
-        self.create_missing_containers(chall_dir)
-        self.update_all_containers(client)
+        create_missing_containers(dir)
+        update_all_containers(client)
 
-        queryset = self.get_queryset()
-        serializer = self.serializer_class(queryset, many=True)
+        queryset = get_queryset_all()
+        serializer = self.serializer(queryset, many=True)
+
         return Response({"data": serializer.data}, status=status.HTTP_200_OK)
 
-class ChallengeDetails(APIView):
-    serializer_class = ContainerSerializer
-
-    def get_queryset(self, name):
-        queryset = Container.objects.filter(name=name)
-        return queryset
+class Information(APIView):
+    serializer = ContainerSerializer
 
     def get(self, request, format=None):
         data = {}
-        
-        name = request.query_params.get('name')
+
+        name = request.query_params.get("name")
         if name == "":
             return Response({"data": "The name parameter cannot be empty."}, status=status.HTTP_404_NOT_FOUND)
         
-        # Get basic information: desc, fav, etc.
-        queryset = self.get_queryset(name)
-        serializer = self.serializer_class(queryset, many=True)
-        # challenge = get_object_or_404(Container, name=name)      
-        data['challengeinfo'] = serializer.data
-        # Get hints
-        base_dir = os.path.abspath(os.path.join(settings.BASE_DIR, os.pardir))
-        chall_dir = os.path.join(base_dir, 'Challenges', name, 'documentation')
-        with open(chall_dir + '/hint.md', 'r') as f:
-            content = f.read()
-        data['hints'] = content
-        # Get solutions
-        base_dir = os.path.abspath(os.path.join(settings.BASE_DIR, os.pardir))
-        chall_dir = os.path.join(base_dir, 'Challenges', request.query_params.get('name'), 'documentation')
+        documentation_dir = os.path.join(settings.CHALLENGE_DIR, name, "documentation")
+        images_dir = os.path.join(documentation_dir, "images")
+        
+        queryset = get_queryset_by_name(name)
+        serializer = self.serializer(queryset, many=True)
 
-        num = len([f for f in os.listdir(chall_dir + '/images/') if os.path.isfile(os.path.join(chall_dir + '/images/', f))])
+        data["information"] = serializer.data[0]
 
-        with open(chall_dir + '/solution.md', 'r') as f:
+        num = len([f for f in os.listdir(images_dir) if os.path.isfile(os.path.join(images_dir, f))])
+        with open(documentation_dir + "/solution.md", "r") as f:
             content = f.read()
             for i in range(1, num + 1):
-                image = f'http://localhost:8000/images/{i}?name={name}'
-                content = re.sub(r'!\[\]\(images/' + f'{i}.png', f'![]({image}/', content)
-        data['solution'] = content
-        # Get video
+                image = f"http://localhost:8000/images/{i}?name={name}"
+                content = re.sub(r"!\[\]\(images/" + f"{i}.png", f"![]({image}/", content)
+        data["solution"] = content        
         
-        
+        with open(documentation_dir + "/hint.md", "r") as f:
+            content = f.read()
+        data["hints"] = content
+
         return Response({"data": data}, status=status.HTTP_200_OK)
-
-# class ChallengeSolution(APIView):
-#     def get(self, request, format=None):
-#         name = request.query_params.get('name')
-#         if name == "":
-#             return Response({"data": "The name parameter cannot be empty."}, status=status.HTTP_404_NOT_FOUND)
-        
-#         base_dir = os.path.abspath(os.path.join(settings.BASE_DIR, os.pardir))
-#         chall_dir = os.path.join(base_dir, 'Challenges', request.query_params.get('name'), 'documentation')
-
-#         num = len([f for f in os.listdir(chall_dir + '/images/') if os.path.isfile(os.path.join(chall_dir + '/images/', f))])
-
-#         with open(chall_dir + '/solution.md', 'r') as f:
-#             content = f.read()
-#             for i in range(1, num + 1):
-#                 image = f'http://localhost:8000/images/{i}?name={name}'
-#                 content = re.sub(r'!\[\]\(images/' + f'{i}.png', f'![]({image}/', content)
-
-#         return Response({"data": content}, status=status.HTTP_200_OK)
-
-# class ChallengeHints(APIView):
-#     def get(self, request, format=None):
-#         name = request.query_params.get('name')
-#         if name == "":
-#             return Response({"data": "The name parameter cannot be empty."}, status=status.HTTP_404_NOT_FOUND)
-        
-#         base_dir = os.path.abspath(os.path.join(settings.BASE_DIR, os.pardir))
-#         chall_dir = os.path.join(base_dir, 'Challenges', name, 'documentation')
-
-#         with open(chall_dir + '/hint.md', 'r') as f:
-#             content = f.read()
-        
-#         return Response({"data": content}, status=status.HTTP_200_OK)
     
-class StopChallenge(APIView):
+class Stop(APIView):
     def get(self, request, format=None):
-        name = request.query_params.get('name')
-        if not name:
+        name = request.query_params.get("name")
+        if name == "":
             return Response({"data": "The name parameter cannot be empty."}, status=status.HTTP_404_NOT_FOUND)
-
+        
         container = get_object_or_404(Container, name=name)
         short_id = container.short_id
 
@@ -167,13 +69,3 @@ class StopChallenge(APIView):
         docker_container.stop()
 
         return Response({"data": f"The {name} container has been stopped successfully."}, status=status.HTTP_200_OK)
-
-# class ChallengeDescription(APIView):
-#     def get(self, request, format=None):
-#         name = request.query_params.get('name')
-#         if not name:
-#             return Response({"data": "The name parameter cannot be empty."}, status=status.HTTP_404_NOT_FOUND)
-        
-#         container = get_object_or_404(Container, name=name)
-         
-#         return Response({"data": container.desc}, status=status.HTTP_200_OK)

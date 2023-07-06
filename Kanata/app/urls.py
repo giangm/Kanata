@@ -1,7 +1,7 @@
 from django.urls import path
-from .views import index, ChallengeImageInfo
+from .views import index, Image
 
 urlpatterns = [
     path('', index),
-    path('images/<int:id>', ChallengeImageInfo.as_view())
+    path('images/<int:id>', Image.as_view())
 ]
