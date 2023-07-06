@@ -184,7 +184,11 @@ def cart():
         if form.validate_on_submit():
             item = form.item.data.lower()
             amount = int(form.amount.data)
-            pricePer = prices[item]
+            pricePer = 0
+            try:
+                pricePer = prices[item]
+            except KeyError:
+                return redirect(url_for("cart"))
             totalCost = pricePer*amount
             current_user.cartTotal += totalCost
             db.session.commit()
