@@ -29,7 +29,7 @@ def create_missing_containers(dir):
 
     Container.objects.bulk_create(containers_to_create)
 
-def update_all_containers(client):
+def update_all_containers():
     containers = client.containers.list()
 
     if len(containers) == 0:
@@ -45,20 +45,44 @@ def update_all_containers(client):
             short_id = container.short_id
             attrs = container.attrs
 
+            container_info = {
+                "nickname": nickname,
+                "status": status,
+                "name": labels["name"],
+                "desc": labels["desc"],
+                "short_id": short_id,
+                "attrs": attrs,
+            }
+
             if labels["name"] in existing_names:
                 container_obj = Container.objects.get(name=labels["name"])
-                container_obj.status = status
-                container_obj.save()
+                Container.objects.filter(pk=container_obj.pk).update(**container_info)
             else:
-                containers_to_create.append(
-                    Container(
-                        nickname=nickname,
-                        status=status,
-                        name=labels["name"],
-                        desc=labels["desc"],
-                        short_id=short_id,
-                        attrs=attrs,
-                    )
-                )
+                containers_to_create.append(Container(**container_info))
 
         Container.objects.bulk_create(containers_to_create)
+
+def start_container(name):
+    try:
+        client.containers.run(f"{name.lower()}:latest", detach=True)
+        return True
+    except Exception as e:
+        print(e)
+        return False
+
+def stop_container(short_id):
+    try:
+        docker_container = client.containers.get(short_id)
+        docker_container.stop()
+        return True
+    except Exception:
+        return False
+
+def update_favourites(name, favourite):
+    try:
+        container_obj = Container.objects.get(name=name)
+        container_obj.favourite = favourite
+        container_obj.save()
+        return True
+    except Exception:
+        return False
