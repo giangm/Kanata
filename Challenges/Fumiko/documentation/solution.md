@@ -34,6 +34,7 @@ This function appears to utilize an unsafe method of concatenating the query str
 ## Create a php page to serve as a payload, and a server to provide the page to the vulnerable server
 
 ![](images/8.png)
+
 Above: Possible payload to allow arbitrary shell command execution on the target machine
 Below: Providing a server for the payload to be served through
 
