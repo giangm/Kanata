@@ -15,9 +15,23 @@ export const fetchInformation = async (name) => {
     .catch((err) => {})
 }
 
+export const requestStart = async (name) => {
+  return axios
+    .get(`${API_BASE_URL}/start?name=${name}`)
+    .then((response) => true)
+    .catch((err) => false)
+}
+
 export const requestStop = async (name) => {
   return axios
     .get(`${API_BASE_URL}/stop?name=${name}`)
-    .then((response) => response)
-    .caatch((err) => {})
+    .then((response) => true)
+    .catch((err) => false)
+}
+
+export const requestFavourite = async (name, favourite) => {
+  return axios
+    .get(`${API_BASE_URL}/favourite?name=${name}&favourite=${favourite}`)
+    .then((response) => true)
+    .catch((err) => false)
 }

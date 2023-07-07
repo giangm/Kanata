@@ -9,9 +9,7 @@ import PlayArrowIcon from '@mui/icons-material/PlayArrow'
 import StopIcon from '@mui/icons-material/Stop'
 import RestartAltIcon from '@mui/icons-material/RestartAlt'
 
-import Hints from '@/components/challenge/Hints'
-
-import { fetchInformation, requestStop } from '@/api/Api'
+import { fetchInformation, requestStart, requestStop, requestFavourite } from '@/api/Api'
 import { SECTIONS } from '@/constants/constants'
 
 class Table extends React.Component {
@@ -27,17 +25,15 @@ class Table extends React.Component {
 
   componentDidMount = async () => {
     const data = await fetchInformation(this.names[this.names.length - 1])
-    this.setState({ data: data }, () => {
-      console.log("====== this.state.data ======");
-      console.log(this.state.data['information']);
-    });
+    this.setState({ data: data, favourite: data["favourite"], status: data["status"] })
+    console.log(this.state.status)
   }
 
   handlePlay = () => {
     this.setState({ loading: true });
-    setTimeout(() => {
+    setTimeout(async () => {
       this.setState({ loading: false });
-      this.setState({ status: "running" });
+      await requestStart(this.names[this.names.length - 1]) && this.setState({ status: "running" }); 
     }, 1500);
   }
 
@@ -45,9 +41,8 @@ class Table extends React.Component {
     this.setState({ loading: true });
     setTimeout(async () => {
       this.setState({ loading: false });
-      await requestStop(this.names[this.names.length - 1]) && this.setState({ status: "stopped"})
+      await requestStop(this.names[this.names.length - 1]) && this.setState({ status: "stopped" });
     }, 1000);
-
   }
 
   handleReset = () => {
@@ -57,7 +52,7 @@ class Table extends React.Component {
     }, 1500);
   };
 
-  handleFavourite = () => this.setState((prevState) => ({ favourite: !prevState.favourite }))
+  handleFavourite = async () => await requestFavourite(this.names[this.names.length - 1], !this.state.favourite) && this.setState({ favourite: !this.state.favourite })
 
   accordions = () => {
     return SECTIONS.map((item, key) => (
@@ -85,9 +80,9 @@ class Table extends React.Component {
                   <Typography variant="h5" component="h2" gutterBottom>
                     Challenge Description
                   </Typography>
-                  {this.state.data["information"] && (
+                  {this.state.data && (
                     <Typography variant="body1" gutterBottom>
-                      {this.state.data["information"]["name"]}
+                      {this.state.data["desc"]}
                     </Typography>
                   )}
                 </div>
