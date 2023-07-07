@@ -27,7 +27,10 @@ class Table extends React.Component {
 
   componentDidMount = async () => {
     const data = await fetchInformation(this.names[this.names.length - 1])
-    return this.setState({ data: data })
+    this.setState({ data: data }, () => {
+      console.log("====== this.state.data ======");
+      console.log(this.state.data['information']);
+    });
   }
 
   handlePlay = () => {
@@ -63,8 +66,8 @@ class Table extends React.Component {
           <Typography variant="h6">{item}</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          {item === "Hints" && <ReactMarkdown>{this.state.data["hints"]}</ReactMarkdown>}
-          {item === "Written Solution" && <ReactMarkdown>{this.state.data["solution"]}</ReactMarkdown>}
+          {item === "Hints" && <ReactMarkdown className="prose">{this.state.data["hints"]}</ReactMarkdown>}
+          {item === "Written Solution" && <ReactMarkdown className="prose">{this.state.data["solution"]}</ReactMarkdown>}
           {/* {item === "Video Solution" && <VideoSolution />} */}
         </AccordionDetails>
       </Accordion>
@@ -82,10 +85,11 @@ class Table extends React.Component {
                   <Typography variant="h5" component="h2" gutterBottom>
                     Challenge Description
                   </Typography>
-                  <Typography variant="body1" gutterBottom>
-                    {/* {this.state.data["information"]["name"]} */}
-                    {/* {console.log(this.state.data["information"]["name"])} */}
-                  </Typography>
+                  {this.state.data["information"] && (
+                    <Typography variant="body1" gutterBottom>
+                      {this.state.data["information"]["name"]}
+                    </Typography>
+                  )}
                 </div>
                 <div>
                   <Fab color="primary" aria-label="add" sx={{ mx: 1 }} onClick={this.state.status === "running" ? this.handleStop : this.handlePlay}>
