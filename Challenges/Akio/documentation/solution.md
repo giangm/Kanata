@@ -1,6 +1,6 @@
 ## main.go
 ### `engine()`
-Further looking into the `engine()` function reveals the application's routing structure, which includes typical user login, logout, registration routes, alongside two groups that implement helper functions to perform checks.
+Looking into the `engine()` function reveals the application's routing structure, which includes typical user login, logout, registration routes, alongside two groups that implement helper functions to perform checks.
 
 ![](images/1.png)
 ### `adminRequired()`, `loginRequired()`
