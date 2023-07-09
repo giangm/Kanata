@@ -54,6 +54,7 @@ class Table extends React.Component {
 
   handleFavourite = async () => await requestFavourite(this.names[this.names.length - 1], !this.state.favourite) && this.setState({ favourite: !this.state.favourite })
 
+  // renderers = {image: ({}: ) => (<img style={{ maxWidth: 475 }}  />)}
   accordions = () => {
     return SECTIONS.map((item, key) => (
       <Accordion key={key}>
@@ -61,8 +62,8 @@ class Table extends React.Component {
           <Typography variant="h6">{item}</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          {item === "Hints" && <ReactMarkdown className="prose">{this.state.data["hints"]}</ReactMarkdown>}
-          {item === "Written Solution" && <ReactMarkdown className="prose">{this.state.data["solution"]}</ReactMarkdown>}
+          {item === "Hints" && <ReactMarkdown className="prose max-w-full">{this.state.data["hints"]}</ReactMarkdown>}
+          {item === "Written Solution" && <ReactMarkdown className="prose max-w-full" components={this.renderers}>{this.state.data["solution"]}</ReactMarkdown>}
           {/* {item === "Video Solution" && <VideoSolution />} */}
         </AccordionDetails>
       </Accordion>
