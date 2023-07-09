@@ -86,3 +86,12 @@ def update_favourites(name, favourite):
         return True
     except Exception:
         return False
+
+def update_complete(name, complete):
+    try:
+        container_obj = Container.objects.get(name=name)
+        container_obj.complete = complete
+        container_obj.save()
+        return True
+    except Exception:
+        return False

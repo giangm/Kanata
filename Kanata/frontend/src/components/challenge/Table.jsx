@@ -1,5 +1,4 @@
 import React from 'react'
-import { Navigate } from 'react-router-dom'
 import ReactMarkdown from 'react-markdown'
 
 import { Typography, Accordion, AccordionSummary, AccordionDetails, Container, Paper, Fab } from '@mui/material'
@@ -8,8 +7,9 @@ import FavoriteIcon from '@mui/icons-material/Favorite'
 import PlayArrowIcon from '@mui/icons-material/PlayArrow'
 import StopIcon from '@mui/icons-material/Stop'
 import RestartAltIcon from '@mui/icons-material/RestartAlt'
+import TaskAltIcon from '@mui/icons-material/TaskAlt'
 
-import { fetchInformation, requestStart, requestStop, requestFavourite } from '@/api/Api'
+import { fetchInformation, requestStart, requestStop, requestFavourite, requestComplete } from '@/api/Api'
 import { SECTIONS } from '@/constants/constants'
 
 class Table extends React.Component {
@@ -18,7 +18,8 @@ class Table extends React.Component {
     loading: false,
     favourite: false,
     status: "stopped",
-    resetting: false
+    resetting: false,
+    complete: false
   }
 
   names = window.location.pathname.split('/')
@@ -33,7 +34,7 @@ class Table extends React.Component {
     this.setState({ loading: true });
     setTimeout(async () => {
       this.setState({ loading: false });
-      await requestStart(this.names[this.names.length - 1]) && this.setState({ status: "running" }); 
+      await requestStart(this.names[this.names.length - 1]) && this.setState({ status: "running" });
     }, 1500);
   }
 
@@ -54,7 +55,8 @@ class Table extends React.Component {
 
   handleFavourite = async () => await requestFavourite(this.names[this.names.length - 1], !this.state.favourite) && this.setState({ favourite: !this.state.favourite })
 
-  // renderers = {image: ({}: ) => (<img style={{ maxWidth: 475 }}  />)}
+  handleComplete = async () => await requestComplete(this.names[this.names.length - 1], !this.state.complete) && this.setState({ complete: !this.state.complete })
+
   accordions = () => {
     return SECTIONS.map((item, key) => (
       <Accordion key={key}>
@@ -73,46 +75,31 @@ class Table extends React.Component {
   render() {
     return (
       <>
-        {
-          false ? <Navigate to="/404" replace /> : (
-            <Container maxWidth="lg" className="h-75 my-5">
-              <Paper elevation={3} className="p-4 flex-between">
-                <div>
-                  <Typography variant="h5" component="h2" gutterBottom>
-                    Challenge Description
-                  </Typography>
-                  {this.state.data && (
-                    <Typography variant="body1" gutterBottom>
-                      {this.state.data["desc"]}
-                    </Typography>
-                  )}
-                </div>
-                <div>
-                  <Fab color="primary" aria-label="add" sx={{ mx: 1 }} onClick={this.state.status === "running" ? this.handleStop : this.handlePlay}>
-                    {this.state.loading ? (
-                      <div className="loading-icon"></div>
-                    ) : this.state.status === "running" ? (
-                      <StopIcon />
-                    ) : (
-                      <PlayArrowIcon />
-                    )}
-                  </Fab>
-                  <Fab aria-label="restart" sx={{ mx: 1 }} disabled={this.state.status !== "running"} onClick={this.handleReset}>
-                    {this.resetting ? (
-                      <div className="loading-icon"></div>
-                    ) : (
-                      <RestartAltIcon />
-                    )}
-                  </Fab>
-                  <Fab aria-label="favourite" sx={{ mx: 1 }} onClick={this.handleFavourite}>
-                    {this.state.favourite ? <FavoriteIcon className="text-error" /> : <FavoriteIcon />}
-                  </Fab>
-                </div>
-              </Paper>
-              {this.accordions()}
-            </Container>
-          )
-        }
+        <Container maxWidth="lg" className="h-75 my-5">
+          <Paper elevation={3} className="p-4 flex-between">
+            <div>
+              <Typography variant="h5" component="h2" gutterBottom>
+                Challenge Description
+              </Typography>
+              {this.state.data && (<Typography variant="body1" gutterBottom>{this.state.data["desc"]}</Typography>)}
+            </div>
+            <div>
+              <Fab color="primary" aria-label="add" sx={{ mx: 1 }} onClick={this.state.status === "running" ? this.handleStop : this.handlePlay}>
+                {this.state.loading ? (<div className="loading-icon"></div>) : this.state.status === "running" ? (<StopIcon />) : (<PlayArrowIcon />)}
+              </Fab>
+              <Fab aria-label="restart" sx={{ mx: 1 }} disabled={this.state.status !== "running"} onClick={this.handleReset}>
+                {this.resetting ? (<div className="loading-icon"></div>) : (<RestartAltIcon />)}
+              </Fab>
+              <Fab aria-label="favourite" sx={{ mx: 1 }} onClick={this.handleFavourite}>
+                {this.state.favourite ? <FavoriteIcon className="text-error" /> : <FavoriteIcon />}
+              </Fab>
+              <Fab aria-label="complete" sx={{ mx: 1 }} onClick={this.handleComplete}>
+                {this.state.complete ? <TaskAltIcon className="text-success" /> : <TaskAltIcon />}
+              </Fab>
+            </div>
+          </Paper>
+          {this.accordions()}
+        </Container>
       </>
     )
   }

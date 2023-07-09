@@ -97,3 +97,18 @@ class Favourite(APIView):
             return Response({"data": f"The {name} container has been updated successfully."}, status=status.HTTP_200_OK)
 
         return Response({"error": "Internal Server Error"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+class Complete(APIView):
+    def get(self, request, format=None):
+        name = request.query_params.get("name")
+        if name == "":
+            return Response({"error": "The name parameter cannot be empty."}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
+        complete = request.query_params.get("complete")
+        if complete is None:
+            return Response({"error": "The name parameter cannot be empty."}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
+        if update_complete(name, ast.literal_eval(complete.capitalize())):
+            return Response({"data": f"The {name} container has been updated successfully."}, status=status.HTTP_200_OK)
+        
+        return Response({"error": "Internal Server Error"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

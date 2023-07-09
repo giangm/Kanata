@@ -35,3 +35,10 @@ export const requestFavourite = async (name, favourite) => {
     .then((response) => true)
     .catch((err) => false)
 }
+
+export const requestComplete = async (name, complete) => {
+  return axios
+    .get(`${API_BASE_URL}/complete?name=${name}&complete=${complete}`)
+    .then((response) => true)
+    .catch((err) => false)
+}
