@@ -1,5 +1,3 @@
-# Solution
-
 ## index.php
 
 ![](images/1.png)

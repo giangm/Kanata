@@ -1,5 +1,3 @@
-# Solution
-
 ## app.py
 On opening the file, the import list and first 5 lines of code shows that the application is built to serve as a Flask web application.
 

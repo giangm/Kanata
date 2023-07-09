@@ -1,5 +1,3 @@
-# Solution
-
 ## app.py
 Looking through the application, functions such as `gen_coupon()`, `cart()`, and `checkout()` indicates that the application may serve a shopping function, tracking user balance and cart totals. Two functions in particular appear to have potential vulnerabilities: `index()` and `cart()`
 ### Vulnerability 1 - `index()`
