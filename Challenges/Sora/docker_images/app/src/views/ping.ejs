@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="/css/ping.css">
+  <title>Ping</title>
+</head>
+<body>
+  <div class="ip-form">
+    <h2>Ping IP Address</h2>
+    <form action="/ping" method="post">
+      <label for="ip">IP Address:</label>
+      <input type="text" id="ip" name="ip" required>
+      <button type="submit">Ping</button>
+    </form>
+    <% if (result) { %>
+      <div class="ping-results">
+        <h3>Ping Results</h3>
+        <p>IP Address: <%= result.ip %></p>
+        <% result.stdout.forEach(function(line) { %>
+          <p><%= line %></p>
+        <% }); %>
+      </div>
+    <% } %>
+  </div>
+</body>
+</html>

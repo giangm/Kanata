@@ -1,0 +1,4 @@
+#!/bin/bash
+
+docker build -t sora docker_images/
+docker run -it --rm --privileged -p 5109:5109 sora
