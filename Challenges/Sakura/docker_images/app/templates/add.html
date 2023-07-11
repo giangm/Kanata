@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Message Now!</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='add.css') }}">
+</head>
+<body>
+    <h1>Add a message</h1>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        <p>{{ form.message.label }}<br>{{ form.message(size=30) }}</p>
+        <p>{{ form.submit() }}</p>
+    </form>
+</body>
+</html>

@@ -1,4 +1,4 @@
-from flask import Flask, redirect, url_for, request, render_template_string, flash
+from flask import Flask, redirect, url_for, request, render_template
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -40,7 +40,7 @@ def load_user(username):
 @app.route("/")
 @login_required
 def index():
-    return render_template_string("<h1>Hello, {{ name }}!</h1>", name=current_user.username)
+    return render_template("index.html", name=current_user.username)
 
 @app.route("/admin")
 @login_required
@@ -52,17 +52,7 @@ def admin():
     for user in users:
         messages.extend(user.messages)
 
-    return render_template_string(
-        """
-        <h1>Admin Dashboard</h1>
-        <h2>Here are the messages:</h2>
-        <ul>
-        {% for message in messages %}
-            <li>{{ message[0] }}: {{ message[1]|safe }}</li>
-        {% endfor %}
-        </ul>
-        """, messages=messages
-    )
+    return render_template("admin.html", messages=messages)
 
 @app.route("/add", methods=["GET", "POST"])
 @login_required
@@ -74,31 +64,13 @@ def add():
             current_user.add_message(m)
             return redirect(url_for('messages'))
 
-    return render_template_string(
-        """
-        <h1>Add a message</h1>
-        <form method="POST">
-            {{ form.hidden_tag() }}
-            <p>{{ form.message.label }}<br>{{ form.message(size=30) }}</p>
-            <p>{{ form.submit() }}</p>
-        </form>
-        """, form=form
-    )
+    return render_template("add.html", form=form)
 
 @app.route("/messages")
 @login_required
 def messages():
     messages = current_user.messages
-    return render_template_string(
-        """
-        <h1>Here are the messages:</h1>
-        <ul>
-        {% for message in messages %}
-            <li>{{ message[0] }}: {{ message[1] }}</li>
-        {% endfor %}
-        </ul>
-        """, messages=messages
-    )
+    return render_template("messages.html", messages=messages)
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -113,24 +85,7 @@ def login():
                     login_user(user)
                     return redirect(url_for("index"))
 
-    return render_template_string(
-        """
-        <h1>Login Now!</h1>
-        <form method="POST">
-            {{ form.hidden_tag() }}
-            <p>
-                {{ form.username.label }}<br>
-                {{ form.username(size=20) }}
-            </p>
-            <p>
-                {{ form.password.label }}<br>
-                {{ form.password(size=20) }}
-            </p>
-            <p>
-                {{ form.submit() }}
-            </p>
-        </form>""", form=form
-    )
+    return render_template("login.html", form=form)
 
 @app.route("/logout")
 @login_required
@@ -150,24 +105,7 @@ def register():
 
             return redirect(url_for("login"))
         
-    return render_template_string(
-        """
-        <h1>Register Now!</h1>
-        <form method="POST">
-            {{ form.hidden_tag() }}
-            <p>
-                {{ form.username.label }}<br>
-                {{ form.username(size=20) }}
-            </p>
-            <p>
-                {{ form.password.label }}<br>
-                {{ form.password(size=20) }}
-            </p>
-            <p>
-                {{ form.submit() }}
-            </p>
-        </form>
-        """, form=form
+    return render_template("register.html", form=form
     )
 
 

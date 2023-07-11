@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login Now!</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Login Now!</h1>
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            <div class="input-group">
+                <label for="username">Username</label>
+                {{ form.username(size=20) }}
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                {{ form.password(size=20) }}
+            </div>
+            <div class="input-group">
+                {{ form.submit() }}
+            </div>
+        </form>
+    </div>
+</body>
+</html>
