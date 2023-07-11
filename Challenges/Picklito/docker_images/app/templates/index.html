@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pickleicious Web</title>
+</head>
+<body>
+    <h1>Welcome to Pickleicious Web</h1>
+    
+    <h2>Recipes</h2>
+    <ul>
+        {% for recipe in recipes %}
+        <li><a href="/recipe/{{ loop.index }}">{{ recipe.name }}</a></li>
+        {% endfor %}
+    </ul>
+    
+    <h2>Create a New Recipe</h2>
+    <form action="/create" method="POST">
+        {% if payload %}
+        <p>Optional payload: {{ payload }}</p>
+        {% endif %}
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br><br>
+        
+        <label for="ingredients">Ingredients:</label>
+        <textarea id="ingredients" name="ingredients" rows="4" required></textarea><br><br>
+        
+        <label for="instructions">Instructions:</label>
+        <textarea id="instructions" name="instructions" rows="8" required></textarea><br><br>
+        
+        <input type="submit" value="Create Recipe">
+    </form>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Recipe</title>
+</head>
+<body>
+    <h1>Create a New Recipe</h1>
+    
+    <form action="/create" method="POST">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br><br>
+        
+        <label for="ingredients">Ingredients:</label>
+        <textarea id="ingredients" name="ingredients" rows="4" required></textarea><br><br>
+        
+        <label for="instructions">Instructions:</label>
+        <textarea id="instructions" name="instructions" rows="8" required></textarea><br><br>
+        
+        <input type="hidden" name="data" value="{{ payload }}">
+        
+        <input type="submit" value="Create Recipe">
+    </form>
+</body>
+</html>
