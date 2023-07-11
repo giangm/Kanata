@@ -16,7 +16,7 @@ class Pickleicious:
 
 @app.route('/')
 def index():
-    payload = request.args.get('payload')  # Optional payload parameter from the URL query string
+    payload = request.args.get('payload')
     print(payload)
     print("BACK IN INDEX")
     recipes = load_recipes()
@@ -42,8 +42,6 @@ def create_recipe():
     return render_template('create_recipe.html', payload=payload, recipes=recipes)
 
 def load_recipes():
-    # Load recipes from a database or file
-    # For simplicity, we'll use a list of hardcoded recipes
     recipes = [
         Recipe("Dill Pickles", "Cucumbers, dill, vinegar, salt", "1. Wash cucumbers. 2. Mix ingredients. 3. Pack cucumbers in jars. 4. Seal jars."),
         Recipe("Bread and Butter Pickles", "Cucumbers, onions, vinegar, sugar", "1. Slice cucumbers and onions. 2. Mix ingredients. 3. Boil mixture. 4. Pack cucumbers and onions in jars. 5. Seal jars."),
@@ -53,7 +51,6 @@ def load_recipes():
     return recipes
 
 def get_recipe(recipe_id):
-    # Get recipe by ID from the loaded recipes
     recipes = load_recipes()
 
     if recipe_id < len(recipes):
@@ -62,8 +59,6 @@ def get_recipe(recipe_id):
         return None
 
 def save_recipe(recipe):
-    # Save recipe to a database or file
-    # For simplicity, we'll just print the recipe for now
     print("Recipe saved:", recipe.name)
 
 if __name__ == '__main__':
