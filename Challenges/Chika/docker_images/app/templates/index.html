@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>One-Time Coupon!</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+</head>
+<body>
+    <div class="container">
+        {% if redeemed %}
+            <h1 class="balance">Balance: {{ balance }}</h1>
+        {% else %}
+            <h1 class="coupon">Submit a one-time coupon now: {{ coupon }}</h1>
+        {% endif %}
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            <div class="form-group">
+                {{ form.coupon.label }} {{ form.coupon() }}
+            </div>
+            <div class="form-group">
+                {{ form.submit() }}
+                <a href="/cart" class="btn">Cart</a>
+                <a href="/checkout" class="btn">Checkout</a>
+                <a href="/logout" class="btn">Logout</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

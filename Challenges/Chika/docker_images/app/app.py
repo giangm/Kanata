@@ -1,10 +1,8 @@
-from flask import Flask, render_template_string, request, redirect, url_for, flash, get_flashed_messages
+from flask import Flask, request, redirect, url_for, flash, get_flashed_messages, render_template
 from flask_sqlalchemy import SQLAlchemy
-from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, PasswordField
-from wtforms.validators import DataRequired, Length
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
+from forms import LoginForm, RegisterForm, CouponForm, ItemsAvailable, CheckoutForm
 import random
 import string
 
@@ -28,28 +26,6 @@ class User(UserMixin, db.Model):
     cartTotal = db.Column(db.Integer, default=0)
     redeemed = db.Column(db.Boolean, default=False)
 
-class LoginForm(FlaskForm):
-    username = StringField("Username", validators=[DataRequired(), Length(min=5, max=20)])
-    password = PasswordField("Password", validators=[DataRequired()])
-    submit = SubmitField("Login")
-
-class RegisterForm(FlaskForm):
-    username = StringField("Username", validators=[DataRequired(), Length(min=5, max=20)])
-    password = PasswordField("Password", validators=[DataRequired()])
-    submit = SubmitField("Register")
-
-class CouponForm(FlaskForm):
-    coupon = StringField('Coupon', validators=[DataRequired(), Length(max=20)])
-    submit = SubmitField('Submit')
-
-class ItemsAvailable(FlaskForm):
-    item = StringField('Item', validators=[DataRequired()])
-    amount = StringField('Amount', validators=[DataRequired()])
-    submit = SubmitField('Submit')
-
-class CheckoutForm(FlaskForm):
-    submit = SubmitField('Checkout')
-
 @login_manager.user_loader
 def load_user(user_id):
     print(user_id)
@@ -64,25 +40,7 @@ def register():
         db.session.add(user)
         db.session.commit()
         return redirect(url_for('login'))
-    return render_template_string(
-        """
-        <h1>Register Now!</h1>
-        <form method="POST">
-            {{ form.hidden_tag() }}
-            <p>
-                {{ form.username.label }}<br>
-                {{ form.username(size=20) }}
-            </p>
-            <p>
-                {{ form.password.label }}<br>
-                {{ form.password(size=20) }}
-            </p>
-            <p>
-                {{ form.submit() }}
-            </p>
-        </form>
-        """, form=form
-    )
+    return render_template("register.html", form=form)
 
 @app.route('/logout')
 @login_required
@@ -100,25 +58,7 @@ def login():
             get_flashed_messages()
             flash("Logged in successfully", "success")
             return redirect(url_for('index'))
-    return render_template_string(
-        """
-        <h1>Login Now!</h1>
-        <form method="POST">
-            {{ form.hidden_tag() }}
-            <p>
-                {{ form.username.label }}<br>
-                {{ form.username(size=20) }}
-            </p>
-            <p>
-                {{ form.password.label }}<br>
-                {{ form.password(size=20) }}
-            </p>
-            <p>
-                {{ form.submit() }}
-            </p>
-        </form>
-        """, form=form
-    )
+    return render_template("login.html", form=form)
 
 @app.route('/', methods=["GET", "POST"])
 @login_required
@@ -141,31 +81,7 @@ def index():
         return redirect(url_for("index"))
     else:
         coupon = User.query.with_entities(User.coupon).filter_by(username=current_user.username).first()
-        return render_template_string(
-            """
-            {% if redeemed %}
-                <h1>Balance: {{ balance }}</h1> 
-            {% else %}
-                <h1>Submit a one-time coupon now: {{ coupon }}</h1>
-            {% endif %}
-            {%  with messages = get_flashed_messages() %}
-                {% if messages %}
-                    {% for message in messages %}
-                        {{ message }}
-                    {% endfor %}
-                {% endif %}
-            {% endwith %}
-            <form method="POST">
-                {{ form.hidden_tag() }}
-                <div>
-                    {{ form.coupon.label }} {{ form.coupon() }}
-                </div>
-                <div>
-                    {{ form.submit() }}
-                </div>
-            </form>
-            """, form=form, coupon=coupon[0], redeemed=current_user.redeemed, balance=current_user.balance
-        )
+        return render_template("index.html", form=form, coupon=coupon[0], redeemed=current_user.redeemed, balance=current_user.balance)
 
 def gen_coupon():
     validCoupons = User.query.with_entities(User.coupon).all()
@@ -194,29 +110,7 @@ def cart():
             db.session.commit()
             return redirect(url_for("cart"))
 
-    return render_template_string(
-        """
-        <h1>Add to cart!</h1>
-        <h2>Apple: $5</h2>
-        <h2>Banana: $10</h2>
-        <h2>Cucumber: $5000</h2>
-        <form method="POST">
-            {{ form.hidden_tag() }}
-            <p>
-                {{ form.item.label }}<br>
-                {{ form.item(size=20) }}
-            </p>
-            <p>
-                {{ form.amount.label }}<br>
-                {{ form.amount(size=20) }}
-            </p>
-            <div>
-                {{ form.submit() }}
-            </div>
-        </form>
-        <h3>Total: ${{ totalCost }}</h3> 
-        """, form=form, totalCost=current_user.cartTotal
-    )
+    return render_template("cart.html", form=form, totalCost=current_user.cartTotal)
 
 @app.route('/checkout', methods=["GET", "POST"])
 @login_required
@@ -235,25 +129,7 @@ def checkout():
             flash("Purchase completed!", "success")
             return redirect(url_for("checkout"))
         
-    return render_template_string(
-        """
-        {%  with messages = get_flashed_messages() %}
-            {% if messages %}
-                {% for message in messages %}
-                    {{ message }}
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
-        <h1>Balance: ${{ balance }}</h1>
-        <h1>Cart Total: ${{ total }}</h1>
-        <form method="POST">
-            {{ form.hidden_tag() }}
-            <div>
-                {{ form.submit() }}
-            </div>
-        </form>
-        """, form=form, balance=current_user.balance, total=current_user.cartTotal
-    )
+    return render_template("checkout.html", form=form, balance=current_user.balance, total=current_user.cartTotal)
     
 
 if __name__ == "__main__":

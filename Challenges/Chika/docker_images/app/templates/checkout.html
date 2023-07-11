@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Checkout Now!</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='checkout.css') }}">
+</head>
+<body>
+    <div class="container">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul class="flash-messages">
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+        <h1>Balance: ${{ balance }}</h1>
+        <h1>Cart Total: ${{ total }}</h1>
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            <div>
+                {{ form.submit() }}
+                <a href="/" class="btn">Apply Coupon</a>
+                <a href="/cart" class="btn">Cart</a>
+                <a href="/logout" class="btn">Logout</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

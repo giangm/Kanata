@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login Now!</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Login Now!</h1>
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            <div class="input-group">
+                <label for="username">Username</label>
+                {{ form.username(size=20) }}
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                {{ form.password(size=20) }}
+            </div>
+            <div class="input-group">
+                {{ form.submit() }}
+                <a href="/register" class="btn">Register</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
