@@ -15,7 +15,7 @@ Students are presented with a range of web applications that simulate real-world
 5. Contains detailed solutions that are delivered via text and video.
 
 ## 🛠️ Getting Started
-To get Kanata up and running, follow these steps.
+To set up Kanata on your machine, you can follow these steps for a smooth installation process:
 
 ### Prerequisites
 - Docker
