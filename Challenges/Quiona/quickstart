@@ -1,0 +1,4 @@
+#!/bin/bash
+
+docker build -t quiona docker_images/
+docker run -it --rm --privileged -p 5000:5000 quiona

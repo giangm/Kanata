@@ -1,7 +1,7 @@
 FROM golang:1.19
 
-LABEL name="Deeaznaz"
-LABEL desc="Faulty ip banning, can be bypassed with x-forwarded-for header"
+LABEL name="Quiona"
+LABEL desc="Blind SQLinjection"
 
 RUN apt update -y && apt upgrade -y
 RUN apt install -y iputils-ping
