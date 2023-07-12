@@ -1,7 +1,7 @@
 FROM python:3.8-slim-buster
 
 LABEL name="Gomenasai"
-LABEL desc="This is a directory traversal bug bug"
+LABEL desc="This challenge addresses a Directory Traversal vulnerability"
 
 WORKDIR /app
 

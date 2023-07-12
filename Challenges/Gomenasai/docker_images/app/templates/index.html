@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Cookie Shop</title>
-</head>
+    <head>
+        <title>Cookie Shop</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    </head>
 <body>
     <h1>Welcome to the Cookie Shop!</h1>
 
@@ -23,7 +24,8 @@
     <h2>Select a Cookie</h2>
     <div>
         {% for cookie in cookies %}
-        <a href="/cookie/display?cookie={{ cookie.file }}">{{ cookie.name }}</a><br>
+        <a href="/cookie/display?cookie={{ cookie.file }}">{{ cookie.name }}</a
+        ><br />
         {% endfor %}
     </div>
 </body>
