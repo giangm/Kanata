@@ -3,7 +3,7 @@ import os
 
 app = Flask(__name__)
 
-cookie_directory = "cookie"  # Replace with the actual path to your cookie images directory
+cookie_directory = "cookie"
 
 
 @app.route("/")
@@ -20,14 +20,14 @@ def index():
 def display_cookie():
     cookie_name = request.args.get("cookie")
     if not cookie_name:
-        abort(400)  # Bad Request if no cookie name provided
+        abort(400)
     namelen = len(cookie_name)-1
     x = 0
     while x < namelen:
         if cookie_name[x] == '.':
             if cookie_name[x+1] =='.':
                 if cookie_name[x+2] =='/':
-                    cookie_name = cookie_name[:x]+cookie_name[x+3:]    # Construct the path to the cookie image
+                    cookie_name = cookie_name[:x]+cookie_name[x+3:]
                     namelen-=2
         x+=1
     print(cookie_name)
