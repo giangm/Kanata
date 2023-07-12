@@ -1,0 +1,4 @@
+#!/bin/bash
+
+docker build -t gomenasai docker_images/
+docker run -it --rm --privileged -p 5000:5000 gomenasai

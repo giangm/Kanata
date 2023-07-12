@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cookie Shop</title>
+</head>
+<body>
+    <h1>Welcome to the Cookie Shop!</h1>
+
+    <h2>Available Cookies</h2>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+        </tr>
+        {% for cookie in cookies %}
+        <tr>
+            <td>{{ cookie.name }}</td>
+            <td>{{ cookie.price }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Select a Cookie</h2>
+    <div>
+        {% for cookie in cookies %}
+        <a href="/cookie/display?cookie={{ cookie.file }}">{{ cookie.name }}</a><br>
+        {% endfor %}
+    </div>
+</body>
+</html>
