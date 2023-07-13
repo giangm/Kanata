@@ -1,10 +1,9 @@
 FROM golang:1.19
 
 LABEL name="Quiona"
-LABEL desc="Blind SQLinjection"
+LABEL desc="This challenge addresses Blind SQL injection"
 
 RUN apt update -y && apt upgrade -y
-RUN apt install -y iputils-ping
 
 WORKDIR /app
 
