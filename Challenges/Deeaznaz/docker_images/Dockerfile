@@ -4,7 +4,6 @@ LABEL name="Deeaznaz"
 LABEL desc="Faulty ip banning, can be bypassed with x-forwarded-for header"
 
 RUN apt update -y && apt upgrade -y
-RUN apt install -y iputils-ping
 
 WORKDIR /app
 
