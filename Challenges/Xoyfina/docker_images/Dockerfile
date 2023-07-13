@@ -1,10 +1,9 @@
 FROM golang:1.19
 
 LABEL name="Xoyfina"
-LABEL desc="second order SQL injection"
+LABEL desc="This challenge addresses second order SQL injection"
 
 RUN apt update -y && apt upgrade -y
-RUN apt install -y iputils-ping
 
 WORKDIR /app
 
