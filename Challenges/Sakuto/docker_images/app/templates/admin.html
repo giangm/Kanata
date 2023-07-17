@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Admin Dashboard</h1>
+        <h2>Here are the messages:</h2>
+        <ul>
+            {% for message in messages %}
+            <li>{{ message[0] }}: {{ message[1]|safe }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

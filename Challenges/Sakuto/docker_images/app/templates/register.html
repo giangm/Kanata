@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register Now!</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Register Now!</h1>
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            <p>
+                {{ form.username.label }}<br>
+                {{ form.username(size=20) }}
+            </p>
+            <p>
+                {{ form.password.label }}<br>
+                {{ form.password(size=20) }}
+            </p>
+            <p>
+                {{ form.submit() }}
+            </p>
+        </form>
+    </div>
+</body>
+</html>

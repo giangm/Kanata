@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Welcome!</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+    </head>
+<body>
+    <h1>Hello, {{ name }}!</h1>
+    <h4>Here are some routes:</h4>
+    <ul>
+        <li><a href="/add">/add</a></li>
+        <li><a href="/logout">/logout</a></li>
+    </ul>
+</body>
+</html>
