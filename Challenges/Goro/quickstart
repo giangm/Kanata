@@ -1,0 +1,4 @@
+#!/bin/bash
+
+docker build -t goro docker_images/
+docker run -it --rm --privileged -p 5111:80 goro
