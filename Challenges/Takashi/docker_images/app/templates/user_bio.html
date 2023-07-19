@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ user.username }}'s Bio{% endblock %}
+
+{% block content %}
+<h2>{{ user.username }}</h2>
+<p>{{ user.bio }}</p>
+
+<form method="post">
+    <label for="bio">Update Bio:</label><br>
+    <textarea id="bio" name="bio" rows="4" cols="50">{{ user.bio }}</textarea><br>
+    <input type="submit" value="Save">
+    <input type="button" value="Logout" onclick="window.location.href='/login'">
+</form>
+{% endblock %}
