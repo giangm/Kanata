@@ -8,7 +8,6 @@ import { ThemeProvider } from '@mui/material/styles'
 import Landing from '@/pages/Landing'
 import List from '@/pages/List'
 import Challenge from '@/pages/Challenge'
-import Emulation from '@/pages/Emulation'
 import NotFound from '@/pages/NotFound'
 
 import Theme from '@/configs/MuiTheme'
@@ -25,7 +24,6 @@ const App = () => {
 
   React.useEffect(() => {
     setParticles(location.pathname !== "/" && location.pathname !== "/404")
-    // location.pathname 
   }, [location]);
 
   return (
@@ -36,7 +34,6 @@ const App = () => {
             <Route exact path="/" element={<Landing />} />
             <Route path="/challenges" element={<List />} />
             <Route path="/challenge/:name" element={<Challenge />} />
-            <Route path="/emulation" element={<Emulation />} />
             <Route path="/404" element={<NotFound />} />
             <Route path="/*" element={<Navigate to="/404" />} />
           </Routes>

@@ -14,7 +14,6 @@ const Navbar = () => {
 				</div>
 				<div className="flex-none">
 					<ul className="menu menu-horizontal px-1">
-						{names[1] === "challenge" ? <li><Link to="/emulate" className="btn-ghost text-info">Emulate</Link></li> : <li></li>}
 						<li><Link to="/" className="btn-ghost">Go home</Link></li>
 					</ul>
 				</div>
