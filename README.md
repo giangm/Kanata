@@ -26,3 +26,9 @@ To set up Kanata on your machine, you can follow these steps for a smooth instal
 1. Clone the Kanata repository
 2. Start the Kanata dashboard
 3. Have fun!
+
+### Tools
+You can use the `install-tools.py` script to install tools such as Visual Studio Code, Burp Suite Community, JD-GUI, and Docker.
+```bash
+python3 install-tools.py
+```
