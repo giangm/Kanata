@@ -45,6 +45,11 @@ func handleLogin(w http.ResponseWriter, r *http.Request) {
 	var requestCount = getRequestCount(ipAddress)
 	username := r.FormValue("username")
 	password := r.FormValue("password")
+	if (username == "" || password == ""){
+		fmt.Fprintf(w, "Please enter your username and password!")
+		return
+	}
+
 	if (requestCount > 5) && ((checkTime(username, ipAddress))) {
 		fmt.Fprintf(w, "You have made too many incorrect login attempts.")
 		return

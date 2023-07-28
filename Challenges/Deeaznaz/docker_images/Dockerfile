@@ -7,14 +7,13 @@ RUN apt update -y && apt upgrade -y
 
 WORKDIR /app
 
-COPY ./app/go.mod ./app/go.sum ./
-RUN go mod download
-
-COPY ./app/*.go ./
+COPY ./app .
 
 ENV CGO_CFLAGS="-g -O2 -Wno-return-local-addr"
 
 EXPOSE 5000
+
+RUN go install github.com/mattn/go-sqlite3
 
 # Run
 CMD ["go", "run", "."]
