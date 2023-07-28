@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y netcat-traditional
 
 WORKDIR /usr/src/app
 
-COPY app/package*.json .
+COPY app/package*.json ./
 
 RUN npm install
 
