@@ -7,6 +7,9 @@ Observing the `news.js` file, it can be seen that, in the case of an `author` pa
 ![](images/2.png)
 ## Triggering reverse shell via Template Injection
 Run `poc.py` - Note: change the ip address specified in Fumika.py to match the docker0 interface on your machine
+
 ![](images/3.png)
+
 Interact with compromised shell through netcat
+
 ![](images/4.png)
