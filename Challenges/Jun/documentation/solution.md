@@ -20,4 +20,5 @@ Utilizing any available port, set up netcat with the `-lvnp` options
 ![](images/4.png)
 ## Run poc.py on the target machine
 Make sure to update the `ip` value to the attacking machine's ip, and the `listen_port` value to the port with which netcat was setup
+
 ![](images/5.png)
