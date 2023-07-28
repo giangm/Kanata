@@ -37,7 +37,7 @@ func main() {
 	http.Handle("/", fs)
 
 	http.HandleFunc("/login", handleLogin)
-	http.ListenAndServe(":10000", nil)
+	http.ListenAndServe(":5000", nil)
 }
 
 func handleLogin(w http.ResponseWriter, r *http.Request) {
