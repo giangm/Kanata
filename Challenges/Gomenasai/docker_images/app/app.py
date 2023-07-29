@@ -27,7 +27,7 @@ def display_cookie():
             if cookie_name[x+1] =='.':
                 if cookie_name[x+2] =='/':
                     cookie_name = cookie_name[:x]+cookie_name[x+3:]
-                    namelen-=2
+                    namelen-=3
         x+=1
 
     relative_path = "cookie/" + cookie_name
