@@ -30,7 +30,7 @@ func handleRequests() {
 	myRouter.HandleFunc("/getMovie", getAllMovies)
 	myRouter.HandleFunc("/getMovie/{name}", getOneMovie)
 	myRouter.HandleFunc("/getMovie/orderBy/{order}", getAllMoviesOrderBy)
-    log.Fatal(http.ListenAndServe(":10000", myRouter))
+    log.Fatal(http.ListenAndServe(":5000", myRouter))
 }
 
 func sqlReturnMovies(rows *sql.Rows) []Movie{
