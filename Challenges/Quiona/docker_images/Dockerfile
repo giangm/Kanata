@@ -14,7 +14,7 @@ COPY ./app .
 
 ENV CGO_CFLAGS="-g -O2 -Wno-return-local-addr"
 
-EXPOSE 10000
+EXPOSE 5000
 
 RUN ls
 
