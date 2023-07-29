@@ -15,7 +15,7 @@ type Movie struct {
 }
 
 func homePage(w http.ResponseWriter, r *http.Request){
-    fmt.Fprintf(w, "func handleRequests() {\nmyRouter := mux.NewRouter().StrictSlash(true)\nmyRouter.HandleFunc(\"/\", homePage)\nmyRouter.HandleFunc(\"/getFlag\", getFlag)\nmyRouter.HandleFunc(\"/getMovie\", getAllMovies)\nmyRouter.HandleFunc(\"/getMovie/{name}\", getOneMovie)\nmyRouter.HandleFunc(\"/getMovie/orderBy/{order}\", getAllMoviesOrderBy)\nlog.Fatal(http.ListenAndServe(\":10000\", myRouter))\n}")
+    fmt.Fprintf(w, "func handleRequests() {\nmyRouter := mux.NewRouter().StrictSlash(true)\nmyRouter.HandleFunc(\"/\", homePage)\nmyRouter.HandleFunc(\"/getMovie\", getAllMovies)\nmyRouter.HandleFunc(\"/getMovie/{name}\", getOneMovie)\nmyRouter.HandleFunc(\"/getMovie/orderBy/{order}\", getAllMoviesOrderBy)\nlog.Fatal(http.ListenAndServe(\":5000\", myRouter))\n}")
     fmt.Println("Endpoint Hit: homePage")
 }
 
@@ -25,7 +25,7 @@ func handleRequests() {
 	myRouter.HandleFunc("/getMovie", getAllMovies)
 	myRouter.HandleFunc("/getMovie/{name}", getOneMovie)
 	myRouter.HandleFunc("/insertMovie/{name}", insertNewMovie)
-    log.Fatal(http.ListenAndServe(":10000", myRouter))
+    log.Fatal(http.ListenAndServe(":5000", myRouter))
 }
 
 func sqlReturnMovies(rows *sql.Rows) []Movie{
