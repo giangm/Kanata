@@ -10,11 +10,13 @@ WORKDIR /app
 COPY ./app/go.mod ./app/go.sum ./
 RUN go mod download
 
-COPY ./app/*.go ./
+COPY ./app .
 
 ENV CGO_CFLAGS="-g -O2 -Wno-return-local-addr"
 
-EXPOSE 5000
+EXPOSE 10000
+
+RUN ls
 
 # Run
-CMD ["go", "run", "."]
+CMD ["go", "run", "main.go"]
