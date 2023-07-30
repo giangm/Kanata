@@ -4,7 +4,7 @@ const pingRouter = express.Router()
 const authRequired = require('../../authentication')
 const passport = require('passport')
 
-pingRouter.post('', async(req, res) => {
+pingRouter.post('', authRequired.checkAuthenticated, async(req, res) => {
     let ip = req.body.ip.replace(/([&|`\s]|id|whoami)+/g, '');
     exec(`ping -c5 -w2 ${ip}`, (error, stdout, stderr) => {
         const lines = stdout.split("\n");
