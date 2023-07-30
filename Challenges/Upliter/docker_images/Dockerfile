@@ -8,6 +8,9 @@ WORKDIR /app
 ADD ./app /app
 
 RUN pip install --no-cache-dir -r requirements.txt
+RUN apt-get update -y
+RUN apt-get upgrade -y
+RUN apt-get install php -y
 
 EXPOSE 5000
 

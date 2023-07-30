@@ -38,14 +38,13 @@ def upload_file():
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         print(filename)
         if 'php' in filename:
-            print("zzz")
             result = execute_file(filename)
         else:
             with open(os.path.join(app.config['UPLOAD_FOLDER'], filename), 'rb') as f:
                 image_data = f.read()
             encoded_image = base64.b64encode(image_data).decode('utf-8')
             result = f'<img src="data:image/png;base64,{encoded_image}" alt="Uploaded Image">'
-        return render_template_string(f'<h1>File Executed Successfully!</h1>{result}')
+        return render_template_string(f'<h1>File Uploaded Successfully!</h1>{result}')
     else:
         return render_template_string('<h1>Invalid File!</h1>')
 
@@ -57,4 +56,4 @@ def execute_file(filename):
     return result
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host="0.0.0.0", port=5000)
