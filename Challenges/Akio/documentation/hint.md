@@ -1,5 +1,5 @@
 ## Hint 1
-The first hint will go in this spot, here...The first hint will go in this spot, here...The first hint will go in this spot, here...The 
+Executing shell commands such as bash using user input tends to be seen as potentially dangerous, as there may be methods for malicious actors to exploit the function to perform their own commands.
 
 ## Hint 2
-The second hint will go here The second hint will go here The second hint will go here The second hint will go here The second hint 
+The ping function can only be called by admin. There may be a vulnerability in this code that allows you to alter the admin's password such that you may authenticate as them.

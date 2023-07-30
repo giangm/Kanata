@@ -1,5 +1,5 @@
 ## Hint 1
-The first hint will go in this spot, here...The first hint will go in this spot, here...The first hint will go in this spot, here...The 
+The application lacks data validation for user input at various points. Supplying unexpected data would allow balances and other data to be manipulated in unintended ways.
 
 ## Hint 2
-The second hint will go here The second hint will go here The second hint will go here The second hint will go here The second hint 
+There is no check performed within the application that limits the number of coupons, or which coupons a single user can redeem.
