@@ -19,15 +19,16 @@ class Table extends React.Component {
     favourite: false,
     status: "stopped",
     resetting: false,
-    complete: false
+    complete: false,
+    url: ''
   }
 
   names = window.location.pathname.split('/')
 
   componentDidMount = async () => {
     const data = await fetchInformation(this.names[this.names.length - 1])
-    this.setState({ data: data, favourite: data["favourite"], status: data["status"] })
-    console.log(this.state.status)
+    this.setState({ data: data, favourite: data["favourite"], status: data["status"], url: data["url"] })
+    console.log(this.state.url)
   }
 
   handlePlay = () => {
@@ -66,7 +67,19 @@ class Table extends React.Component {
         <AccordionDetails>
           {item === "Hints" && <ReactMarkdown className="prose max-w-full">{this.state.data["hints"]}</ReactMarkdown>}
           {item === "Written Solution" && <ReactMarkdown className="prose max-w-full" components={this.renderers}>{this.state.data["solution"]}</ReactMarkdown>}
-          {/* {item === "Video Solution" && <VideoSolution />} */}
+          {item === "Video Solution" && this.state.data["url"] && ( // Only render if video URL is available
+            <div className="youtube-video-container">
+              <iframe
+                title="YouTube Video Solution"
+                width="100%"
+                height="400"
+                src={this.state.data["url"]}
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+            </div>
+          )}
         </AccordionDetails>
       </Accordion>
     ))

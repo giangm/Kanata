@@ -57,6 +57,10 @@ class Information(APIView):
             content = f.read()
         data["hints"] = content
 
+        with open(documentation_dir + "/video-url.md", "r") as f:
+            content = f.read()
+        data["url"] = content
+
         return Response({"data": data}, status=status.HTTP_200_OK)
 
 class Start(APIView):
