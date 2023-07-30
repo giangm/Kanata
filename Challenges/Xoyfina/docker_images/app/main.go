@@ -67,7 +67,6 @@ func getOneMovie(w http.ResponseWriter, r *http.Request){
 	vars := mux.Vars(r)
 	movieName := vars["name"]
 	movieName, err := url.QueryUnescape(movieName)
-	fmt.Println(movieName)
 	const file string = "apidatabase.db"
 	db, err := sql.Open("sqlite3", file)
 	if err != nil {
@@ -86,17 +85,15 @@ func getOneMovie(w http.ResponseWriter, r *http.Request){
 	    log.Fatal(err)
 	}
 	defer rows.Close()
-	fmt.Println("hello")
 	var movie string
 	var movies []string
 	for rows.Next() {
 		err := rows.Scan(&movie)
 		fmt.Println(movie)
-		rows, err = db.Query(fmt.Sprintf("SELECT * FROM movies WHERE name = %s", movie))
+		rows, err = db.Query(fmt.Sprintf("SELECT * FROM movies WHERE name = '%s'", movie))
 		if err != nil {
-
-	    fmt.Println("double bedge")
-	    	log.Fatal(err)
+	    	fmt.Println("SQL error!")
+			return
 		}
 		for rows.Next() {
 		    var x string
@@ -111,8 +108,7 @@ func getOneMovie(w http.ResponseWriter, r *http.Request){
 		}
 
 	}
-	fmt.Println("hey")
-	fmt.Println(movies)
+	print(movies)
 
 	if rows.Err() != nil {
 	    // Handle the error
