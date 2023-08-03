@@ -1,4 +1,4 @@
 #!/bin/bash
 
-docker build -t chika docker_images/
-docker run -it --rm --privileged -p 5103:5000 chika
+docker build -t chika $(dirname $0)/docker_images/
+docker run -d --rm --privileged -p 5103:5000 chika

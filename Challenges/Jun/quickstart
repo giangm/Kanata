@@ -1,4 +1,4 @@
 #!/bin/bash
 
-docker build -t jun docker_images/
-docker run -it --rm --privileged -p 5108:5108 jun
+docker build -t jun $(dirname $0)/docker_images/
+docker run -d --rm --privileged -p 5108:5108 jun

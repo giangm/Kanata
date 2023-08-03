@@ -1,4 +1,4 @@
 #!/bin/bash
 
-docker build -t fumika docker_images/
-docker run -it --rm --privileged -p 5105:5105 fumika
+docker build -t fumika $(dirname $0)/docker_images/
+docker run -d --rm --privileged -p 5105:5105 fumika

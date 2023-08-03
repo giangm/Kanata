@@ -1,4 +1,4 @@
 #!/bin/bash
 
-docker build -t hirotaka docker_images/
-docker run -it --rm --privileged -p 5222:8080 hirotaka
+docker build -t hirotaka $(dirname $0)/docker_images/
+docker run -d --rm --privileged -p 5222:8080 hirotaka

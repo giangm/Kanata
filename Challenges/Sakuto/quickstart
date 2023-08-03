@@ -1,4 +1,4 @@
 #!/bin/bash
 
-docker build -t sakuto docker_images/
-docker run -it --rm --privileged -p 5101:5000 sakuto
+docker build -t sakuto $(dirname $0)/docker_images/
+docker run -d --rm --privileged -p 5101:5000 sakuto

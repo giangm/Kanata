@@ -1,4 +1,4 @@
 #!/bin/bash
 
-docker build -t beniko docker_images/
-docker run -it --rm --privileged --log-driver none -p 5103:80 beniko
+docker build -t beniko $(dirname $0)/docker_images/
+docker run -d --rm --privileged --log-driver none -p 5103:80 beniko

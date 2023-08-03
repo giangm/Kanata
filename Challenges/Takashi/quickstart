@@ -1,4 +1,4 @@
 #!/bin/bash
 
-docker build -t takashi docker_images/
-docker run -it --rm --privileged -p 5102:5000 takashi
+docker build -t takashi $(dirname $0)/docker_images/
+docker run -d --rm --privileged -p 5102:5000 takashi

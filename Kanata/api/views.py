@@ -1,5 +1,6 @@
 import re
 import ast
+import os
 
 from django.conf import settings
 from django.shortcuts import get_object_or_404
@@ -69,7 +70,9 @@ class Start(APIView):
         if name == "":
             return Response({"error": "The name parameter cannot be empty."}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         
-        if start_container(name):
+        quickstart = os.path.join(os.path.abspath(os.path.join(settings.BASE_DIR, os.pardir)), "Challenges", name, "quickstart")
+        
+        if start_container(quickstart):
             return Response({"data": f"The {name} container has been started successfully."}, status=status.HTTP_200_OK)
 
         return Response({"error": "Internal Server Error"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
@@ -82,6 +85,7 @@ class Stop(APIView):
         
         container = get_object_or_404(Container, name=name)
         short_id = container.short_id
+        
         if stop_container(short_id):
             return Response({"data": f"The {name} container has been stopped successfully."}, status=status.HTTP_200_OK)
         

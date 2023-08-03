@@ -1,0 +1,13 @@
+FROM mongo:latest
+
+LABEL name=""
+LABEL desc=""
+
+ENV envs=secret
+ENV envu=admin
+ENV envp=6KZe8UX-LSX@KJu
+ENV DB_URL=mongodb://db:27017/nosql_challenge
+
+EXPOSE 27017
+
+CMD ["mongod"]

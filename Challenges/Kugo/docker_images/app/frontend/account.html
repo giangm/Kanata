@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Account Page</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    .btn-orange {
+      color: #fff;
+      background-color: #f60;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .btn-orange:hover {
+      background-color: #f90;
+    }
+  </style>
+</head>
+<body>
+  <h1>Welcome to Your Account!</h1>
+  <button id="logoutBtn" class="btn-orange">Logout</button>
+
+  <script>
+    function logout() {
+      fetch('/logout', {
+        method: 'POST'
+      })
+      .then(response => {
+        if (response.redirected) {
+          window.location.href = response.url;
+        }
+      })
+      .catch(error => console.error('Error:', error));
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const logoutBtn = document.getElementById('logoutBtn');
+      logoutBtn.addEventListener('click', logout);
+    });
+  </script>
+</body>
+</html>

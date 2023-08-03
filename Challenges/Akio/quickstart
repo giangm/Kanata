@@ -1,4 +1,4 @@
 #!/bin/bash
 
-docker build -t akio docker_images/
-docker run -it --rm --privileged -p 5102:8080 akio
+docker build -t akio $(dirname $0)/docker_images/
+docker run -d --rm --privileged -p 5102:8080 akio

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Login</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <div class="container">
+    <div class="login-form">
+      <h1>Login</h1>
+      <form onsubmit="return login()">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" required />
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" required />
+        </div>
+        <button type="submit">Submit</button>
+        <div id="response" class="error-message"></div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+      document.querySelector("form").addEventListener("submit", function (event) {
+        event.preventDefault();
+        login();
+      });
+
+      function login() {
+        let username = document.getElementById('username').value;
+        let password = document.getElementById('password').value;
+
+        try {
+          username = JSON.parse(username);
+          password = JSON.parse(password);
+        } catch (error) {
+        }
+
+        fetch('/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            username: username,
+            password: password
+          })
+        })
+          .then(response => {
+            if (response.status === 401) {
+              document.getElementById('response').textContent = 'Invalid login credentials!';
+            } else if (response.redirected) {
+              window.location.href = response.url;
+            }
+          })
+          .catch(error => console.error('Error:', error));
+      }
+    });
+  </script>
+</body>
+
+</html>

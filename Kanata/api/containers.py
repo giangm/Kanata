@@ -1,6 +1,7 @@
 import docker
 import sys
 import os
+import subprocess
 
 from docker.errors import DockerException
 from .models import Container
@@ -62,18 +63,19 @@ def update_all_containers():
 
         Container.objects.bulk_create(containers_to_create)
 
-def start_container(name):
+def start_container(quickstart):
     try:
-        client.containers.run(f"{name.lower()}:latest", detach=True)
+        subprocess.run(["bash", quickstart])
+        update_all_containers()
         return True
-    except Exception as e:
-        print(e)
+    except Exception:
         return False
 
 def stop_container(short_id):
     try:
         docker_container = client.containers.get(short_id)
         docker_container.stop()
+        update_all_containers()
         return True
     except Exception:
         return False
@@ -83,6 +85,7 @@ def update_favourites(name, favourite):
         container_obj = Container.objects.get(name=name)
         container_obj.favourite = favourite
         container_obj.save()
+        update_all_containers()
         return True
     except Exception:
         return False
@@ -92,6 +95,7 @@ def update_complete(name, complete):
         container_obj = Container.objects.get(name=name)
         container_obj.complete = complete
         container_obj.save()
+        update_all_containers()
         return True
     except Exception:
         return False

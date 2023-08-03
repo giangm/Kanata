@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# Build and run the MongoDB container
+docker build -t mongo -f $(dirname $0)/docker_images/Dockerfile_db .
+docker run -d --rm --name mongo -p 27017:27017 mongo
+
+# Build and run the app container
+docker build -t kugo -f $(dirname $0)/docker_images/Dockerfile .
+docker run -d --rm --name kugo_app --link mongo:db -p 3000:3000 kugo
