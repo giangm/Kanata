@@ -1,6 +1,7 @@
 from app import app, db
 from flask import render_template, redirect, request, url_for, flash, session
 from models import User
+import hashlib
 
 @app.route('/')
 def index():
@@ -12,7 +13,7 @@ def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        user = User.query.filter_by(username=username, password=password).first()
+        user = User.query.filter_by(username=username, password=hashlib.md5(password.encode('utf-8')).hexdigest()).first()
 
         if user:
             session['user_id'] = user.id
