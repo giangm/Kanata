@@ -1,4 +1,4 @@
 #!/bin/bash
 
 docker build -t ryo docker_images/
-docker run -it --rm --privileged -p 8080:8080 ryo
+docker run -it --rm --privileged -p 5155:8080 ryo
