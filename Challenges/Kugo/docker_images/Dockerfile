@@ -10,7 +10,7 @@ COPY app/backend/package*.json ./
 RUN npm install
 
 COPY app/backend/* ./
-COPY app/frontend/* ./frontend
+COPY app/frontend/* ./frontend/
 
 ENV envs=secret
 ENV envu=admin
