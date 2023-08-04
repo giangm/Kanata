@@ -1,9 +1,4 @@
 #!/bin/bash
 
-<<<<<<< HEAD
 docker build -t kenichiro $(dirname $0)/docker_images/
-docker run -d --rm --privileged -p 8080:8080 kenichiro
-=======
-docker build -t kenichiro docker_images/
-docker run -it --rm --privileged -p 5123:8080 kenichiro
->>>>>>> 84835bd1f1a8c4eb4bafb493816c27bd5dd5c8df
+docker run -d --rm --privileged -p 5123:8080 kenichiro
