@@ -15,7 +15,8 @@ setup = {
 
 tools = {
     "Java": "sudo apt install -y default-jre",
-    "Visual Studio Code": "sudo apt install -y code",
+    "Visual Studio Code": "sudo apt install -y code-oss",
+    "NPM": "sudo apt install npm",
     "Burp Suite Community": "sudo apt install -y burpsuite",
     "JD-GUI": "wget -O /tmp/jd-gui-1.6.6.deb 'https://github.com/java-decompiler/jd-gui/releases/download/v1.6.6/jd-gui-1.6.6.deb' \
         && sudo dpkg -i /tmp/jd-gui-1.6.6.deb",
