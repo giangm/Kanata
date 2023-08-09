@@ -54,6 +54,7 @@ In a new terminal, and inside the frontend directory, serve the frontend.
 <img src="https://github.com/giangm/Kanata/assets/23440767/042fcbde-a472-4f3c-936e-0922e0b6910a" width="400"/>
 
 Now you can go to the local link provided to view the frontend.
+
 <img src="https://github.com/giangm/Kanata/assets/23440767/d4328c4b-4b3e-407d-8bc4-e4739645e5c3" width="400"/>
 
 
