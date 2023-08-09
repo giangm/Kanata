@@ -62,6 +62,13 @@ class Information(APIView):
             content = f.read()
         data["url"] = content
 
+        quickstart = os.path.join(os.path.abspath(os.path.join(settings.BASE_DIR, os.pardir)), "Challenges", name, "quickstart")
+        with open(quickstart, "r") as f:
+            content = f.read()
+            content = "\n".join(content.split("\n")[-3:])
+            content = content.split(":")[-2].split(" ")[-1]
+        data["connection"] = content
+
         return Response({"data": data}, status=status.HTTP_200_OK)
 
 class Start(APIView):
