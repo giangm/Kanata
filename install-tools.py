@@ -16,13 +16,17 @@ setup = {
 tools = {
     "Java": "sudo apt install -y default-jre",
     "Visual Studio Code": "sudo apt install -y code-oss",
-    "NPM": "sudo apt install npm",
+    "NPM":"sudo apt install npm",
     "Burp Suite Community": "sudo apt install -y burpsuite",
     "JD-GUI": "wget -O /tmp/jd-gui-1.6.6.deb 'https://github.com/java-decompiler/jd-gui/releases/download/v1.6.6/jd-gui-1.6.6.deb' \
         && sudo dpkg -i /tmp/jd-gui-1.6.6.deb",
     "ILSpy": "wget -O /tmp/Linux.x64.Release.zip 'https://github.com/icsharpcode/AvaloniaILSpy/releases/download/v7.2-rc/Linux.x64.Release.zip' \
         && unzip /tmp/Linux.x64.Release.zip -d /tmp/ && sudo mkdir -p /opt/ILSpy && sudo unzip /tmp/ILSpy-linux-x64-Release.zip -d /opt/ILSpy",
-    "Docker": "sudo apt install -y docker.io && sudo groupadd -f docker && sudo usermod -aG docker $USER"
+    "Docker": "sudo apt install -y docker.io && sudo groupadd -f docker && sudo usermod -aG docker $USER",
+    "Docker Python": "sudo python3 -m pip install docker",
+    "Django REST": "sudo python3 -m pip install djangorestframework",
+    "Django CORS": "sudo python3 -m pip install django-cors-headers",
+    "Backend Swagger": "sudo python3 -m pip install drf-yasg"
 }
 
 cleanup = {
