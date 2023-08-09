@@ -35,27 +35,27 @@ First, we will copy the link to git clone.
 
 Then, clone the repository into a folder.
 
-<img src="https://github.com/giangm/Kanata/assets/23440767/b9219095-6e10-4a26-aa78-f16082909ad9" width="400"/>
+<img src="https://github.com/giangm/Kanata/assets/23440767/b9219095-6e10-4a26-aa78-f16082909ad9" width="600"/>
 
 Next, run the install tools python script to install all necessary tools. Hit `Y` for all.
 
-<img src="https://github.com/giangm/Kanata/assets/23440767/3ee02f1e-84ee-4cdf-b02f-5ff404a0644d" width="400"/>
+<img src="https://github.com/giangm/Kanata/assets/23440767/3ee02f1e-84ee-4cdf-b02f-5ff404a0644d" width="600"/>
 
 In the frontend directory, run the command `npm install`.
 
-<img src="https://github.com/giangm/Kanata/assets/23440767/bc2c8f68-f2a7-4cd1-8c25-7adec1a95d3a" width="400"/>
+<img src="https://github.com/giangm/Kanata/assets/23440767/bc2c8f68-f2a7-4cd1-8c25-7adec1a95d3a" width="600"/>
 
 Start the backend server.
 
-<img src="https://github.com/giangm/Kanata/assets/23440767/3ea559f2-d983-41a8-9db4-45cfa03e96ff" width="400"/>
+<img src="https://github.com/giangm/Kanata/assets/23440767/3ea559f2-d983-41a8-9db4-45cfa03e96ff" width="600"/>
 
 In a new terminal, and inside the frontend directory, serve the frontend.
 
-<img src="https://github.com/giangm/Kanata/assets/23440767/042fcbde-a472-4f3c-936e-0922e0b6910a" width="400"/>
+<img src="https://github.com/giangm/Kanata/assets/23440767/042fcbde-a472-4f3c-936e-0922e0b6910a" width="600"/>
 
 Now you can go to the local link provided to view the frontend.
 
-<img src="https://github.com/giangm/Kanata/assets/23440767/d4328c4b-4b3e-407d-8bc4-e4739645e5c3" width="400"/>
+<img src="https://github.com/giangm/Kanata/assets/23440767/d4328c4b-4b3e-407d-8bc4-e4739645e5c3" width="600"/>
 
 
 ### Tools
