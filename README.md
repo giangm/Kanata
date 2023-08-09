@@ -41,7 +41,7 @@ Next, run the install tools python script to install all necessary tools.
 
 ![image](https://github.com/giangm/Kanata/assets/23440767/dafe0d31-a9ea-4471-9653-e4a5867b6081)
 
-Run 'npm install' command in the frontend directory. Install npm if not installed.
+Run `npm install` command in the frontend directory. Install npm if not installed.
 
 ### Tools
 You can use the `install-tools.py` script to install tools such as Visual Studio Code, Burp Suite Community, JD-GUI, and Docker.
