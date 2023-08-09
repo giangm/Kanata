@@ -37,12 +37,25 @@ Then, clone the repository into a folder.
 
 ![image](https://github.com/giangm/Kanata/assets/23440767/b9219095-6e10-4a26-aa78-f16082909ad9)
 
-Next, run the install tools python script to install all necessary tools.
+Next, run the install tools python script to install all necessary tools. Hit `Y` for all.
 
-![image](https://github.com/giangm/Kanata/assets/23440767/3541003a-470b-4908-ade9-0a431490abc8)
+![image](https://github.com/giangm/Kanata/assets/23440767/3ee02f1e-84ee-4cdf-b02f-5ff404a0644d)
 
+In the frontend directory, run the command `npm install`.
 
-Run `npm install` command in the frontend directory. Install npm if not installed.
+![image](https://github.com/giangm/Kanata/assets/23440767/bc2c8f68-f2a7-4cd1-8c25-7adec1a95d3a)
+
+Start the backend server.
+
+![image](https://github.com/giangm/Kanata/assets/23440767/3ea559f2-d983-41a8-9db4-45cfa03e96ff)
+
+In a new terminal, and inside the frontend directory, serve the frontend.
+
+![image](https://github.com/giangm/Kanata/assets/23440767/042fcbde-a472-4f3c-936e-0922e0b6910a)
+
+Now you can go to the local link provided to view the frontend.
+![image](https://github.com/giangm/Kanata/assets/23440767/d4328c4b-4b3e-407d-8bc4-e4739645e5c3)
+
 
 ### Tools
 You can use the `install-tools.py` script to install tools such as Visual Studio Code, Burp Suite Community, JD-GUI, and Docker.
