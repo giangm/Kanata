@@ -28,6 +28,7 @@ To set up Kanata on your machine, you can follow these steps for a smooth instal
 3. Have fun!
 
 ### Starting Dashboard Steps
+
 First, we will copy the link to git clone.
 
 ![image](https://github.com/giangm/Kanata/assets/23440767/d25250ab-9aed-4f56-82ac-501750103d55)
