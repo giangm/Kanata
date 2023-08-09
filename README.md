@@ -39,7 +39,8 @@ Then, clone the repository into a folder.
 
 Next, run the install tools python script to install all necessary tools.
 
-![image](https://github.com/giangm/Kanata/assets/23440767/dafe0d31-a9ea-4471-9653-e4a5867b6081)
+![image](https://github.com/giangm/Kanata/assets/23440767/3541003a-470b-4908-ade9-0a431490abc8)
+
 
 Run `npm install` command in the frontend directory. Install npm if not installed.
 
