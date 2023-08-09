@@ -29,12 +29,15 @@ To set up Kanata on your machine, you can follow these steps for a smooth instal
 
 ### Starting Dashboard Steps
 First, we will copy the link to git clone.
+
 ![image](https://github.com/giangm/Kanata/assets/23440767/d25250ab-9aed-4f56-82ac-501750103d55)
 
 Then, clone the repository into a folder.
+
 ![image](https://github.com/giangm/Kanata/assets/23440767/b9219095-6e10-4a26-aa78-f16082909ad9)
 
 Next, run the install tools python script to install all necessary tools.
+
 ![image](https://github.com/giangm/Kanata/assets/23440767/dafe0d31-a9ea-4471-9653-e4a5867b6081)
 
 Run 'npm install' command in the frontend directory. Install npm if not installed.
