@@ -28,11 +28,16 @@ To set up Kanata on your machine, you can follow these steps for a smooth instal
 3. Have fun!
 
 ### Starting Dashboard Steps
-1. ![image](https://github.com/giangm/Kanata/assets/23440767/d25250ab-9aed-4f56-82ac-501750103d55)
-2. ![image](https://github.com/giangm/Kanata/assets/23440767/b9219095-6e10-4a26-aa78-f16082909ad9)
-3. ![image](https://github.com/giangm/Kanata/assets/23440767/02e813d9-f87c-4151-bf9c-097436076534)
-4. ![image](https://github.com/giangm/Kanata/assets/23440767/dafe0d31-a9ea-4471-9653-e4a5867b6081)
-5. Run 'npm install' command in the frontend directory. Install npm if not installed.
+First, we will copy the link to git clone.
+![image](https://github.com/giangm/Kanata/assets/23440767/d25250ab-9aed-4f56-82ac-501750103d55)
+
+Then, clone the repository into a folder.
+![image](https://github.com/giangm/Kanata/assets/23440767/b9219095-6e10-4a26-aa78-f16082909ad9)
+
+Next, run the install tools python script to install all necessary tools.
+![image](https://github.com/giangm/Kanata/assets/23440767/dafe0d31-a9ea-4471-9653-e4a5867b6081)
+
+Run 'npm install' command in the frontend directory. Install npm if not installed.
 
 ### Tools
 You can use the `install-tools.py` script to install tools such as Visual Studio Code, Burp Suite Community, JD-GUI, and Docker.
