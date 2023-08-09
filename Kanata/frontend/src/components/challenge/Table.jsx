@@ -95,6 +95,11 @@ class Table extends React.Component {
                 Challenge Description
               </Typography>
               {this.state.data && (<Typography variant="body1" gutterBottom>{this.state.data["desc"]}</Typography>)}
+              <br/>
+              <Typography variant="h5" component="h3" gutterBottom>
+                Connection Info
+              </Typography>
+              <Typography variant="body1" gutterBottom>http://localhost:{this.state.data["connection"]}</Typography>
             </div>
             <div>
               <Fab color="primary" aria-label="add" sx={{ mx: 1 }} onClick={this.state.status === "running" ? this.handleStop : this.handlePlay}>
